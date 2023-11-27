@@ -2,7 +2,7 @@
 lab:
     title: 'Lab: Deploy and manage a container app using Azure Container Apps'
     type: 'Answer Key'
-    module: 'Module 1: Exploring Azure Resource Manager'
+    module: 'Module 6: Deploy and manage a container app using Azure Container Apps'
 ---
 
 # Lab: Deploy and manage a container app using Azure Container Apps
