@@ -10,7 +10,7 @@ lab:
 
 ## Instructions
 
-In this lab, you deploy and manage an app using Azure Container Apps. To implement the solution, you configure Azure Container Registry, Azure Container Apps, Azure Pipelines and a collection of other resources.  
+In this lab, you deploy and manage an app using Azure Container Apps. To implement the solution, you begin by configuring the development environment with local tools and Azure resources. Once the environment is prepared, you use Azure Container Registry, Azure Container Apps, and Azure Pipelines to deploy and manage your app.  
 
 By the end of this lab, you're able to:
 
@@ -27,9 +27,9 @@ The lab environment includes a virtual machine that represents a local host comp
 > [!IMPORTANT]
 > You must provide your own Azure and GitHub accounts to complete this lab. Ensure that your accounts have Owner privileges.
 
-### Exercise 1: Configure command line tools
+### Exercise 1: Configure host environment tools
 
-In this exercise, you ensure that Windows PowerShell and Azure CLI are configured correctly on the virtual machine.
+In this exercise, you ensure that scripting and developer tools are configured correctly on the virtual machine.
 
 #### Task 1: Ensure that Windows PowerShell in installed
 
@@ -55,11 +55,7 @@ Complete the following steps to configure Azure CLI:
 
 1. Install the Azure Container Apps extension using the `az extension add --name containerapp --upgrade` command.
 
-### Exercise 2: Configure developer tools
-
-In this exercise, you configure Docker Desktop, the .NET SDK, and Visual Studio Code
-
-#### Task 1: Install Docker Desktop
+#### Task 3: Install Docker Desktop
 
 Complete the following steps to install Docker Desktop:
 
@@ -71,7 +67,7 @@ Complete the following steps to install Docker Desktop:
 
 1. Follow the online instructions to install Docker Desktop.
 
-#### Task 2: Install the .NET 8 SDK
+#### Task 4: Install the .NET 8 SDK
 
 1. In your web browser, navigate to the .NET 8 SDK download page: [https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download).
 
@@ -79,7 +75,7 @@ Complete the following steps to install Docker Desktop:
 
 1. Once the download is complete, open the installation file and follow the online instructions to install the .NET 8 SDK.
 
-#### Task 3: Configure Visual Studio Code with C#, Docker, and Azure App Service extensions
+#### Task 5: Configure Visual Studio Code with C#, Docker, and Azure App Service extensions
 
 Complete the following steps to configure Visual Studio Code extensions:
 
@@ -119,7 +115,7 @@ Complete the following steps to configure Visual Studio Code extensions:
 
 1. Close Visual Studio Code.
 
-### Exercise 3: Configure Azure resources
+### Exercise 2: Configure Azure resources
 
 In this exercise, you configure Azure resources that support an Azure Container Apps solution, create and deploy a container app, and deploy a self-hosted Windows agent.
 
@@ -130,9 +126,9 @@ You will complete the following tasks:
 - Configure an Azure Service Bus.
 - Configure an Azure Container Registry.
 
-#### Task 1: Configure a Resource Group for your Azure resources
+#### Task 1: Verify Azure Resource Group configuration
 
-Complete the following steps to configure a resource group for your Azure resources.
+Complete the following steps to ensure that an Azure resource group is configured as expected.
 
 1. Open a browser window, and then navigate to the Azure portal: [https://portal.azure.com/](https://portal.azure.com/)
 
@@ -266,7 +262,7 @@ Complete the following steps to configure a Container Registry instance.
 
 1. On the Properties page, select **Admin user**, and then select **Save**.
 
-### Exercise 4: Create and configure app deployment resources
+### Exercise 3: Create and configure app deployment resources
 
 In this exercise, you create and deploy a container app, and deploy a self-hosted Windows agent.
 
@@ -526,7 +522,7 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
     For extra help, see the following documentation: [https://learn.microsoft.com/azure/devops/pipelines/agents/windows-agent](https://learn.microsoft.com/azure/devops/pipelines/agents/windows-agent)
 
-### Exercise 5: Configure Azure Container Registry for a secure connection with Azure Container Apps
+### Exercise 4: Configure Azure Container Registry for a secure connection with Azure Container Apps
 
 In this exercise, you configure a container registry instance for a secure connection from a container app.
 
@@ -682,7 +678,7 @@ To verify that your configuration meets the specified requirements, complete the
 
     - Virtual network/subnet: set to **VNET1/PESubnet**.
 
-### Exercise 6: Create and configure a container app in Azure Container Apps
+### Exercise 5: Create and configure a container app in Azure Container Apps
 
 In this exercise, you deploy a container app from an image in the Azure Container Registry to the Azure Container Apps platform.
 
@@ -896,7 +892,7 @@ To verify that your configuration meets the specified requirements, complete the
 
 1. To verify your HTTP scale rule, run testing software to simulate 10,000 concurrent HTTP requests and ensure that container replicas are created.
 
-### Exercise 7: Configure continuous integration by using Azure Pipelines
+### Exercise 6: Configure continuous integration by using Azure Pipelines
 
 In this exercise, you deploy a container app from an image in the Azure Container Registry to the Azure Container Apps platform.
 
@@ -1062,7 +1058,7 @@ To verify that your pipeline deployed the app image successfully, complete the f
 
     Notice that the **Event initiated by** column on the right shows your `Project1` as the source.
 
-### Exercise 8: Manage revisions in Azure Container Apps
+### Exercise 7: Manage revisions in Azure Container Apps
 
 In this exercise, you deploy a new revision of your container app and configure traffic splitting between two labeled revisions.
 
