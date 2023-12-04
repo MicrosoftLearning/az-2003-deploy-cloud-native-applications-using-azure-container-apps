@@ -20,143 +20,30 @@ By the end of this lab, you're able to:
 1. Scale a deployed app in Azure Container Apps
 1. Manage revisions in Azure Container Apps
 
-### Before you start
-
-The lab environment includes a virtual machine that represents a local host computer.
-
 > [!IMPORTANT]
 > You must provide your own Azure and GitHub accounts to complete this lab. Ensure that your accounts have Owner privileges.
 
-### Exercise 1: Configure host environment tools
+### Exercise 1: Configure Azure resources
 
-In this exercise, you ensure that scripting and developer tools are configured correctly on the virtual machine.
-
-#### Task 1: Ensure that Windows PowerShell in installed
-
-Complete the following steps to ensure that Windows PowerShell is installed:
-
-1. Open the Windows Start menu.
-
-1. In the Search textbox, enter **windows powerShell**
-
-1. Verify that the Windows PowerShell app is listed.
-
-    If Windows PowerShell isn't installed, open a browser window, installation instructions can be found here: [https://learn.microsoft.com/powershell/scripting/install/installing-powershell](https://learn.microsoft.com/powershell/scripting/install/installing-powershell).
-
-#### Task 2: Configure Azure CLI extensions
-
-Complete the following steps to configure Azure CLI:
-
-1. Open a command line or terminal application, such as Windows Command Prompt.
-
-1. Sign in to Azure using the `az login` command.
-
-1. Follow the prompts to complete the authentication process.
-
-1. Install the Azure Container Apps extension using the `az extension add --name containerapp --upgrade` command.
-
-#### Task 3: Install Docker Desktop
-
-Complete the following steps to install Docker Desktop:
-
-1. Ensure that you're logged in to the virtual machine environment using the Admin account provided.
-
-1. Open a browser window, and then navigate to the Docker Desktop install page: [https://docs.docker.com/desktop/install/windows-install/](https://docs.docker.com/desktop/install/windows-install/)
-
-    Links to instructions for Mac and Linux installs are available on this page.
-
-1. Follow the online instructions to install Docker Desktop.
-
-#### Task 4: Install the .NET 8 SDK
-
-1. In your web browser, navigate to the .NET 8 SDK download page: [https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download).
-
-1. Select **.NET SDK x64**
-
-1. Once the download is complete, open the installation file and follow the online instructions to install the .NET 8 SDK.
-
-#### Task 5: Configure Visual Studio Code with C#, Docker, and Azure App Service extensions
-
-Complete the following steps to configure Visual Studio Code extensions:
-
-1. Use the Windows Start menu to launch Visual Studio Code.
-
-    - You will be configuring Visual Studio Code extensions for Docker and Azure App Service during the lab.
-
-1. On the **Activity bar**, select **Extensions**.
-
-    The Activity bar is the vertical menu on the left side of the Visual Studio Code user interface.
-
-1. In the **Search Extensions in Marketplace** textbox, enter **C#**
-
-    Entering "C#" filters the list of extensions to show only the extensions that have something to do with C# coding.
-
-1. In the filtered list of available extensions, select the extension labeled "**C# Dev Kit** - Official C# extension from Microsoft" that's published by Microsoft.
-
-1. To install the extension, select **Install**.
-
-1. Wait for the installation to complete.
-
-1. On the **EXTENSIONS** view, replace **C#** with **docker**.
-
-1. In the filtered list of available extensions, select the extension labeled **Docker**  that's published by Microsoft.
-
-1. To install the extension, select **Install**.
-
-1. Wait for the installation to complete.
-
-1. On the **EXTENSIONS** view, replace **docker** with **azure app service**.
-
-1. In the filtered list of available extensions, select the extension labeled **Azure App Service**  that's published by Microsoft.
-
-1. To install the extension, select **Install**.
-
-1. Wait for the installation to complete.
-
-1. Close Visual Studio Code.
-
-### Exercise 2: Configure Azure resources
-
-In this exercise, you configure Azure resources that support an Azure Container Apps solution, create and deploy a container app, and deploy a self-hosted Windows agent.
+In this exercise, you configure Azure resources that support your Azure Container Apps solution.
 
 You will complete the following tasks:
 
-- Validate Resource Group configuration.
 - Configure an Azure Virtual Network with subnets.
 - Configure an Azure Service Bus.
 - Configure an Azure Container Registry.
 
-#### Task 1: Verify Azure Resource Group configuration
-
-Complete the following steps to ensure that an Azure resource group is configured as expected.
-
-1. Open a browser window, and then navigate to the Azure portal: [https://portal.azure.com/](https://portal.azure.com/)
-
-1. Ensure that your Azure account has permission to create resources and assign RBAC permissions. Check the RBAC role(s) assigned to your account before you continue.
-
-    The Contributor role isn't able to assign Azure RBAC permissions. We recommend using an account that has been assigned the Owner, Azure account administrator, or Azure co-administrator role for your Azure subscription. Other role combinations could provide sufficient access to complete this guided project module but have not been tested.
-
-1. On the top search bar of the Azure portal, in the Search textbox, enter **resource group**
-
-1. In the search results, select **Resource groups**, and then select **+ Create**.
-
-1. On the Basics tab, configure the resource group as follows:
-
-    - Subscription: Specify the Azure subscription that you're using to complete the guided project.
-
-    - Resource group: Enter **RG1**
-
-    - Region: Select **Central US**.
-
-1. Select **Review + create**.
-
-1. Once validation has passed, select **Create**.
-
-#### Task 2: Configure a Virtual Network and subnets
+#### Task 1: Configure a Virtual Network and subnets
 
 Complete the following steps to configure a Virtual Network and subnets.
 
-1. Ensure that you have your Azure portal open in a browser window.
+1. Open a browser window, and then navigate to the Azure portal: `https://portal.azure.com/`
+
+1. On the Azure portal menu, select **Home**.
+
+1. On the **Home** page, under **Resources**, verify that a resource group named **RG1** is listed.
+
+    If the **RG1** resource group has not been created, create it now.
 
 1. On the top search bar of the Azure portal, in the Search textbox, enter **virtual network**
 
@@ -261,6 +148,94 @@ Complete the following steps to configure a Container Registry instance.
 1. On the left-side menu, under Settings, select **Properties**.
 
 1. On the Properties page, select **Admin user**, and then select **Save**.
+
+### Exercise 2: Configure host environment tools
+
+In this exercise, you ensure that scripting and developer tools are configured correctly on the virtual machine.
+
+#### Task 1: Ensure that Windows PowerShell in installed
+
+Complete the following steps to ensure that Windows PowerShell is installed:
+
+1. Open the Windows Start menu.
+
+1. In the Search textbox, enter **windows powerShell**
+
+1. Verify that the Windows PowerShell app is listed.
+
+    If Windows PowerShell isn't installed, open a browser window, installation instructions can be found here: `https://learn.microsoft.com/powershell/scripting/install/installing-powershell`
+
+#### Task 2: Configure Azure CLI extensions
+
+Complete the following steps to configure Azure CLI:
+
+1. Open a command line or terminal application, such as Windows Command Prompt.
+
+1. Sign in to Azure using the `az login` command.
+
+1. Follow the prompts to complete the authentication process.
+
+1. Install the Azure Container Apps extension using the `az extension add --name containerapp --upgrade` command.
+
+#### Task 3: Install Docker Desktop
+
+Complete the following steps to install Docker Desktop:
+
+1. Ensure that you're logged in to the virtual machine environment using the Admin account provided.
+
+1. Open a browser window, and then navigate to the Docker Desktop install page: `https://docs.docker.com/desktop/install/windows-install/`
+
+    Links to instructions for Mac and Linux installs are available on this page.
+
+1. Follow the online instructions to install Docker Desktop.
+
+#### Task 4: Install the .NET 8 SDK
+
+1. In your web browser, navigate to the .NET 8 SDK download page: `https://dotnet.microsoft.com/download`
+
+1. Select **.NET SDK x64**
+
+1. Once the download is complete, open the installation file and follow the online instructions to install the .NET 8 SDK.
+
+#### Task 5: Configure Visual Studio Code with C#, Docker, and Azure App Service extensions
+
+Complete the following steps to configure Visual Studio Code extensions:
+
+1. Use the Windows Start menu to launch Visual Studio Code.
+
+    - You will be configuring Visual Studio Code extensions for Docker and Azure App Service during the lab.
+
+1. On the **Activity bar**, select **Extensions**.
+
+    The Activity bar is the vertical menu on the left side of the Visual Studio Code user interface.
+
+1. In the **Search Extensions in Marketplace** textbox, enter **C#**
+
+    Entering "C#" filters the list of extensions to show only the extensions that have something to do with C# coding.
+
+1. In the filtered list of available extensions, select the extension labeled "**C# Dev Kit** - Official C# extension from Microsoft" that's published by Microsoft.
+
+1. To install the extension, select **Install**.
+
+1. Wait for the installation to complete.
+
+1. On the **EXTENSIONS** view, replace **C#** with **docker**.
+
+1. In the filtered list of available extensions, select the extension labeled **Docker**  that's published by Microsoft.
+
+1. To install the extension, select **Install**.
+
+1. Wait for the installation to complete.
+
+1. On the **EXTENSIONS** view, replace **docker** with **azure app service**.
+
+1. In the filtered list of available extensions, select the extension labeled **Azure App Service**  that's published by Microsoft.
+
+1. To install the extension, select **Install**.
+
+1. Wait for the installation to complete.
+
+1. Close Visual Studio Code.
 
 ### Exercise 3: Create and configure app deployment resources
 
@@ -439,8 +414,6 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
 1. From the home page of your organization, open your user settings, and then select **Personal access tokens**.
 
-    ![Screenshot showing where to access the Azure DevOps personal access token.](../media/create-personal-access-token.png)
-
 1. To create a personal access token, select **+ New Token**.
 
 1. Under Name, enter **APL2003**.
@@ -520,7 +493,7 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
     A message informing you that the agent started successfully is displayed.
 
-    For extra help, see the following documentation: [https://learn.microsoft.com/azure/devops/pipelines/agents/windows-agent](https://learn.microsoft.com/azure/devops/pipelines/agents/windows-agent)
+    For extra help, see the following documentation: `https://learn.microsoft.com/azure/devops/pipelines/agents/windows-agent`
 
 ### Exercise 4: Configure Azure Container Registry for a secure connection with Azure Container Apps
 
@@ -641,42 +614,6 @@ Complete the following steps to configure your container registry with a private
 1. On the Review + create tab, when you see the Validation passed message, select **Create**.
 
 1. Wait for the deployment to complete.
-
-#### Review
-
-In this exercise, you completed the following:
-
-- you created a user-assigned managed identity.
-- you ensured that the managed identity can pull artifacts by using the principle of least privilege.
-- you ensured that your Azure Container Registry can be accessed from a private endpoint on VNET1/PESubnet.
-
-To verify that your configuration meets the specified requirements, complete the following steps:
-
-1. In the Azure portal, open your Container Registry resource.
-
-1. On the Access Control (IAM) page, select **Role assignments**.
-
-1. Verify that the role assignments list shows the **AcrPull** role assigned to the User-assigned Managed Identity resource.
-
-1. On the left-side menu, under Settings, select **Networking**.
-
-1. On the Networking page, select the **Private access** tab.
-
-1. Under Private endpoint, select the private endpoint that you created.
-
-    For example, select **per-acr-apl2003**
-
-1. On the Private endpoint page, under Settings, select **DNS configuration**.
-
-1. Verify the following DNS setting:
-
-    - Private DNS zone: set to **privatelink.azurecr.io**.
-
-1. On the left-side menu, select **Overview**.
-
-1. Verify the following setting:
-
-    - Virtual network/subnet: set to **VNET1/PESubnet**.
 
 ### Exercise 5: Create and configure a container app in Azure Container Apps
 
@@ -840,58 +777,6 @@ Complete the following steps to configure HTTP scale rules for your Container Ap
 
 1. Ensure that your new scale rule is displayed.
 
-#### Review
-
-In this exercise, you created a container app that meets the following requirements:
-
-- is deployed to VNET1/ACASubnet
-- pulls an image from Azure Container Registry
-- authenticates using the managed identity
-- uses Container App to connect to a Service Bus instance using the .NET client type
-- the app can run up to two replicas, where scaling is based on HTTP scaling rules
-
-To verify that your configuration meets the specified requirements, complete the following steps:
-
-1. In the Azure portal, ensure that your Container App resource is open.
-
-1. On the left-side menu, under Settings, select **Continuous deployment**.
-
-1. Verify that the expected values are selected:
-
-    - Repository source: **Azure Container Registry**
-    - Registry: the name of your Container Registry (for example: acrapl2003cah)
-    - Image: **aspnetcorecontainer**
-
-1. Close the Container App page.
-
-1. Open your Container App Environment resource.
-
-1. Verify that your Container App uses the proper subnet as follows:
-
-    - On the Overview page, verify that Virtual Network is set to **VNET1**.
-    - On the Overview page, verify that Infrastructure subnet is set to **ACASubnet**.
-
-1. In the Azure portal, open PowerShell.
-
-1. Run the following command:
-
-    ```azurecli
-    az containerapp connection show [--connection]
-                                    [--name]
-                                    [--resource-group]
-    
-    ```
-
-    For example:
-
-    ```azurecli
-    az containerapp connection show --connection servicebus_b2a10 --name aca-apl2003 --resource-group RG1  
-    ```
-
-1. Verify that the targetService properties match the specified configuration.
-
-1. To verify your HTTP scale rule, run testing software to simulate 10,000 concurrent HTTP requests and ensure that container replicas are created.
-
 ### Exercise 6: Configure continuous integration by using Azure Pipelines
 
 In this exercise, you deploy a container app from an image in the Azure Container Registry to the Azure Container Apps platform.
@@ -926,7 +811,7 @@ You complete the following tasks during this exercise:
 
 Complete the following steps to configure your pipelines to use the self-hosted agent pool.
 
-1. Open a browser window, navigate to https://dev.azure.com, and then open your Azure DevOps organization.
+1. Open a browser window, navigate to `https://dev.azure.com`, and then open your Azure DevOps organization.
 
 1. On your Azure DevOps page, to open your DevOps project, select **`Project1`**.
 
@@ -1022,41 +907,11 @@ Complete the following steps to configure your pipelines to use the self-hosted 
 
     A pipeline page opens to display the associated job. The job section displays job status, which progresses from Queued to Waiting.
 
-    ![Screenshot of Azure Pipelines showing a successful run of Pipeline1.](../media/pipeline-progress-queued-waiting.png)
-
     It can take a couple minutes for the status to transition from Queued to Waiting.
 
 1. If 'Permission needed' is displayed under Job,  requires permission to proceed (), view the requirement and provide the required permissions.
 
 1. Monitor the status of the run operation and verify that the run is successful.
-
-    ![Screenshot of Azure Pipelines showing a successful run of Pipeline1.](../media/pipeline-progress-run-success.png)
-
-#### Review
-
-In this exercise, you configured an Azure Pipeline that meets the following requirements:
-
-- deploys a container image from your container registry to your container app using a self-hosted agent pool.
-
-To verify that your pipeline deployed the app image successfully, complete the following steps:
-
-1. Ensure that you have `Project1` open in Azure DevOps.
-
-1. On the left side menu, select **Pipelines**, and then select **`Pipeline1`**.
-
-1. The Runs tab displays individual runs that can be selected to review details.
-
-    ![Screenshot of Azure Pipelines showing a successful run of Pipeline1.](../media/pipeline-run-validation-devops.png)
-
-1. Open your Azure portal, and then open your Container App.
-
-1. On the left side menu, select **Activity Log**.
-
-1. Verify that a **Create or Update Container App** operation succeeded as a result of running your pipeline.
-
-    ![Screenshot of a Container App Activity Log showing a successful Create or Update Container App operation.](../media/pipeline-run-validation-azure-portal.png)
-
-    Notice that the **Event initiated by** column on the right shows your `Project1` as the source.
 
 ### Exercise 7: Manage revisions in Azure Container Apps
 
@@ -1160,13 +1015,3 @@ You complete the following tasks during this exercise:
 1. For the other revision, under Traffic, enter **75** as the percentage.
 
 1. At the top of the page, select **Save**.
-
-#### Review
-
-1. Ensure that you have your Container App open in the Azure portal.
-
-1. On the left-side menu, under Revisions, select **Revisions**.
-
-1. Verify that your revisions are configured as follows:
-
-    ![Screenshot of a Container App revisions configured with labels for traffic-splitting.](../media/container-app-traffic-splitting-percentage-labels.png)
