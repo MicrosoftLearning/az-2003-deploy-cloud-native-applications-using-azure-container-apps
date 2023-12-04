@@ -20,9 +20,6 @@ By the end of this lab, you're able to:
 1. Scale a deployed app in Azure Container Apps
 1. Manage revisions in Azure Container Apps
 
-> [!IMPORTANT]
-> You must provide your own Azure and GitHub accounts to complete this lab. Ensure that your accounts have Owner privileges.
-
 ### Exercise 1: Configure Azure resources
 
 In this exercise, you configure Azure resources that support your Azure Container Apps solution.
@@ -33,17 +30,27 @@ You will complete the following tasks:
 - Configure an Azure Service Bus.
 - Configure an Azure Container Registry.
 
-#### Task 1: Configure a Virtual Network and subnets
+#### Task 2: Examine resource group settings
 
-Complete the following steps to configure a Virtual Network and subnets.
+Complete the following steps to examine resource groups settings.
 
-1. Open a browser window, and then navigate to the Azure portal: `https://portal.azure.com/`
+1. In the lab environment, open a browser window, and then navigate to the Azure portal: `https://portal.azure.com/`
 
-1. On the Azure portal menu, select **Home**.
+    Work with your classroom instructor if need help signing into the Azure portal with a valid subscription/account.
 
-1. On the **Home** page, under **Resources**, verify that a resource group named **RG1** is listed.
+1. On your Azure portal Home page, under **Navigate**, select **Resource groups**.
+
+1. On the Resource groups page, select **RG1**.
 
     If the **RG1** resource group has not been created, create it now.
+
+1. Make note of the **Location** setting assigned to the **RG1** resource group.
+
+    You will use the same location/region when creating other Azure resources during this lab.
+
+1. Close the **RG1** page and then close **Resource groups** page.
+
+#### Task 2: Configure a Virtual Network and subnets
 
 1. On the top search bar of the Azure portal, in the Search textbox, enter **virtual network**
 
@@ -56,7 +63,7 @@ Complete the following steps to configure a Virtual Network and subnets.
     - Subscription: Ensure that the Azure subscription that you're using for this guided project is selected.
     - Resource group name: Select **RG1**
     - Virtual network name: Enter **VNET1**
-    - Region: Ensure that Central US is selected.
+    - Region: Ensure that specified Region matches the location setting of your resource group.
 
 1. Select the **IP addresses** tab.
 
@@ -78,19 +85,19 @@ Complete the following steps to configure a Virtual Network and subnets.
     - Starting address: Ensure that **10.0.4.0** is specified.
     - Subnet size: Ensure that **/23 (512 addresses)** is specified.
 
+    The subnet for Azure Container Apps requires an address space larger than 256.
+
 1. Select **Add**.
 
 1. Select **Review + create**.
 
 1. Once validation has passed, select **Create**.
 
-1. Wait for the deployment to complete.
+1. Wait for the deployment to complete, and then close the VNET1 page.
 
 #### Task 3: Configure Service Bus
 
 Complete the following steps to configure a Service Bus instance.
-
-1. Ensure that you have your Azure portal open in a browser window.
 
 1. On the top search bar of the Azure portal, in the Search textbox, enter **service bus**
 
@@ -102,15 +109,15 @@ Complete the following steps to configure a Service Bus instance.
 
     - Subscription: Ensure that the Azure subscription that you're using for this guided project is selected.
     - Resource group name: Select **RG1**
-    - Namespace name: Enter **sb-apl2003-** followed by your name or initials. For example: **sb-apl2003-cah**.
-    - Location: Ensure that **Central US** is selected.
+    - Namespace name: Enter **sb-apl2003-** followed by your initials and the date. For example: **sb-apl2003-cah12oct**.
+    - Location: Ensure that specified Location matches the location setting of your resource group.
     - Pricing tier: Select **Basic**.
 
 1. Select **Review + create**.
 
 1. Once the Validation succeeded message appears, select **Create**.
 
-1. Wait for the deployment to complete.
+1. Wait for the deployment to complete, and then close the Service Bus Namespace page.
 
 #### Task 4: Configure Azure Container Registry
 
@@ -132,24 +139,28 @@ Complete the following steps to configure a Container Registry instance.
     - Subscription: Ensure that the Azure subscription that you're using for this guided project is selected.
     - Resource group: Select **RG1**.
     - Registry name: Enter **acrapl2003** followed by your initials and date. For example: **acrapl2003cah12oct**
-    - Location: Ensure that **Central US** is selected.
+    - Location: Ensure that specified Location matches the location setting of your resource group.
     - SKU: Select **Premium**.
 
 1. Select **Review + create**.
 
-1. Select **Create**.
+1. Once the Validation passed message appears, select **Create**.
 
 1. After the deployment has completed, open the deployed resource.
 
-1. On the left-side menu, under Settings, select **Networking**.
+1. On the left-side menu of the Container registry page, under **Settings**, select **Networking**.
 
 1. On the Networking page, on the Public access tab, ensure that **All networks** is selected.
 
-1. On the left-side menu, under Settings, select **Properties**.
+1. On the left-side menu, under **Settings**, select **Properties**.
 
 1. On the Properties page, select **Admin user**, and then select **Save**.
 
-### Exercise 2: Configure host environment tools
+1. Close the Container registry page.
+
+1. Close your Azure portal (browser) window.
+
+### Exercise 2: Configure developer tools in the host environment
 
 In this exercise, you ensure that scripting and developer tools are configured correctly on the virtual machine.
 
@@ -159,11 +170,13 @@ Complete the following steps to ensure that Windows PowerShell is installed:
 
 1. Open the Windows Start menu.
 
-1. In the Search textbox, enter **windows powerShell**
+1. In the Search textbox, enter **windows powershell**
 
 1. Verify that the Windows PowerShell app is listed.
 
     If Windows PowerShell isn't installed, open a browser window, installation instructions can be found here: `https://learn.microsoft.com/powershell/scripting/install/installing-powershell`
+
+1. Close the Start menu.
 
 #### Task 2: Configure Azure CLI extensions
 
@@ -173,29 +186,57 @@ Complete the following steps to configure Azure CLI:
 
 1. Sign in to Azure using the `az login` command.
 
+    A browser window will open that allows you to select the Azure account.
+
 1. Follow the prompts to complete the authentication process.
 
-1. Install the Azure Container Apps extension using the `az extension add --name containerapp --upgrade` command.
+1. Close the browser window.
+
+1. In the command line app, to install the Azure Container Apps extension, enter the following command: `az extension add --name containerapp --upgrade`
+
+1. Close the command line app.
 
 #### Task 3: Install Docker Desktop
 
 Complete the following steps to install Docker Desktop:
 
-1. Ensure that you're logged in to the virtual machine environment using the Admin account provided.
+1. Open your browser window, and then open a new tab.
 
-1. Open a browser window, and then navigate to the Docker Desktop install page: `https://docs.docker.com/desktop/install/windows-install/`
+1. Navigate to the Docker Desktop install page: `https://docs.docker.com/desktop/install/windows-install/`
 
     Links to instructions for Mac and Linux installs are available on this page.
 
-1. Follow the online instructions to install Docker Desktop.
+1. Select **Docker Desktop for Windows** and wait for the installer file to download.
+
+1. Open the installer file, and then follow the online instructions to install Docker Desktop.
+
+    The installation process takes about 5 minutes.
+
+1. Once the installation has completed, select **Close and restart**.
+
+1. Wait for the **Docker Subscription Service Agreement** to appear.
+
+1. On the ???? page, select **Accept**.
+
+1. On the ???? page, select **Finish**.
+
+1. On the ???? page, select **Yes**.
+
+1. On the ???? page, select **Continue without signing in**.
+
+1. On the ???? page, select **Skip**.
+
+1. Minimize the Docker Desktop app.
 
 #### Task 4: Install the .NET 8 SDK
 
-1. In your web browser, navigate to the .NET 8 SDK download page: `https://dotnet.microsoft.com/download`
+1. In a web browser window, and then navigate to the .NET 8 SDK download page: `https://dotnet.microsoft.com/download`
 
 1. Select **.NET SDK x64**
 
 1. Once the download is complete, open the installation file and follow the online instructions to install the .NET 8 SDK.
+
+1. Close the browser window.
 
 #### Task 5: Configure Visual Studio Code with C#, Docker, and Azure App Service extensions
 
@@ -203,7 +244,7 @@ Complete the following steps to configure Visual Studio Code extensions:
 
 1. Use the Windows Start menu to launch Visual Studio Code.
 
-    - You will be configuring Visual Studio Code extensions for Docker and Azure App Service during the lab.
+    - You will be configuring Visual Studio Code extensions for C#, Docker, and Azure App Service during the lab.
 
 1. On the **Activity bar**, select **Extensions**.
 
@@ -258,7 +299,13 @@ Complete the following steps to create a WebAPI app and publish to a GitHub repo
 
 1. Create a new folder named **APL2003** in a location that is easy to find.
 
-    For example, create a folder named **APL2003** on the Windows Desktop.
+    For example, to create a folder named **APL2003** on the Windows Desktop:
+
+    - In the Open Folder dialog, select **Desktop**.
+    - Select **New folder**.
+    - Type **APL2003** and then press Enter.
+    - Select **Select Folder**.
+    - If prompted, select **Yes, I trust the authors**.
 
 1. On the Terminal menu, select **New Terminal**.
 
@@ -530,7 +577,7 @@ Complete the following steps to configure a user-assigned managed identity.
 
     - Subscription: Specify the Azure subscription that you're using for this guided project.
     - Resource group: **RG1**
-    - Region: **Central US**
+    - Region: Enter the Region that matches the region setting of your resource group.
     - Name: **uai-apl2003**
 
 1. Select **Review + create**.
@@ -582,7 +629,7 @@ Complete the following steps to configure your container registry with a private
     - Subscription: Specify the Azure subscription that you're using for this guided project.
     - Resource group: **RG1**
     - Name: **pe-acr-apl2003**
-    - Region: Ensure that **Central US** is selected.
+    - Region: Ensure that specified Region matches the region setting of your resource group.
 
 1. Select **Next: Resource**.
 
@@ -666,7 +713,7 @@ Complete the following steps to create a container app that uses an ACR image.
     - Subscription: Specify the Azure subscription that you're using for this guided project.
     - Resource group: **RG1**
     - Container app name: **aca-apl2003**
-    - Region: Select the Region specified for VNET1 (Central US).
+    - Region: Ensure that specified Region matches the region setting of VNET1.
 
         The container app needs to be in the same region/location as the virtual network so you can choose VNET1 for the managed environment. For this guided project, keep all of your resources in the region/location specified for your resource group.
 
