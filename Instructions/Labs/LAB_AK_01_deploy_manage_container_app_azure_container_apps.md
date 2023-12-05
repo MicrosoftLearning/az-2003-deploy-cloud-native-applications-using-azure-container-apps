@@ -30,7 +30,7 @@ You will complete the following tasks:
 - Configure an Azure Service Bus.
 - Configure an Azure Container Registry.
 
-#### Task 2: Examine resource group settings
+#### Task 1: Examine resource group settings
 
 Complete the following steps to examine resource groups settings.
 
@@ -42,7 +42,7 @@ Complete the following steps to examine resource groups settings.
 
 1. On the Resource groups page, select **RG1**.
 
-    If the **RG1** resource group has not been created, create it now.
+    If the RG1 resource group has not been created, create it now.
 
 1. Make note of the **Location** setting assigned to the **RG1** resource group.
 
@@ -51,6 +51,8 @@ Complete the following steps to examine resource groups settings.
 1. Close the **RG1** page and then close **Resource groups** page.
 
 #### Task 2: Configure a Virtual Network and subnets
+
+Complete the following steps to configure a virtual network and subnets.
 
 1. On the top search bar of the Azure portal, in the Search textbox, enter **virtual network**
 
@@ -63,7 +65,7 @@ Complete the following steps to examine resource groups settings.
     - Subscription: Ensure that the Azure subscription that you're using for this guided project is selected.
     - Resource group name: Select **RG1**
     - Virtual network name: Enter **VNET1**
-    - Region: Ensure that specified Region matches the location setting of your resource group.
+    - Region: Ensure that the specified Region matches the location setting of your resource group.
 
 1. Select the **IP addresses** tab.
 
@@ -74,6 +76,8 @@ Complete the following steps to examine resource groups settings.
     - Name: Enter **`PESubnet`**
     - Starting address: Ensure that **10.0.0.0** is specified.
     - Subnet size: Ensure that **/24 (256 addresses)** is specified.
+
+    This first subnet will be used for a private endpoint (Azure Container Registry).
 
 1. Select **Save**.
 
