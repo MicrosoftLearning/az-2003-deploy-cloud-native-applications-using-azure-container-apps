@@ -315,6 +315,12 @@ Complete the following steps to create a WebAPI app and publish to a GitHub repo
     dotnet new webapi --no-https
     ```
 
+1. At the terminal command prompt, to add the Swagger package to your project, enter the following command:
+
+    ```dotnetcli
+    dotnet add package Swashbuckle.AspNetCore.Swagger --version 6.5.0
+    ```
+
 1. At the terminal command prompt, run the following dotnet CLI command:
 
     ```dotnetcli
