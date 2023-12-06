@@ -288,30 +288,47 @@ In this exercise, you create and deploy a container app, and deploy a self-hoste
 
 You will complete the following tasks:
 
-- Create a WebAPI app and publish the app to a GitHub repository.
+- Configure an Azure DevOps project and initialize code repo.
+- Create a WebAPI app in Visual Studio Code.
 - Create Docker image and push the image to Azure Container Registry.
-- Configure an Azure DevOps project and starter pipeline.
+- Push code to Azure DevOps project and configure a starter pipeline.
 - Deploy a self-hosted Windows agent.
 
-#### Task 1: Create a WebAPI app and publish to a GitHub repository
+#### Task 1: Configure Azure DevOps project and initialize code repo
+
+Complete the following steps to configure Azure DevOps project:
+
+1. Open the Azure portal.
+
+1. On the top search bar, in the Search textbox, enter **devops**
+
+1. In the search results, select **Azure DevOps organizations**.
+
+1. Select **My Azure DevOps Organizations**.
+
+1. If you haven’t created an organization, select **Free**.
+
+1. To create a new project, select **New project**.
+
+1. On the Create new project page, enter the following information:
+
+    - Project name: **Project1**
+    - Description: **APL-2003 project**
+    - Visibility: **Public**
+
+1. On the Create new project page, select **Create**.
+
+1. On the left-side menu, select **Repos**.
+
+1. Under 'Clone to your computer', select **Clone in VS Code**.
+
+1. Follow the instructions to open Visual Studio Code and sign in using your Azure account credentials.
+
+#### Task 2: Create a WebAPI app and publish to a GitHub repository
 
 Complete the following steps to create a WebAPI app and publish to a GitHub repository.
 
-1. Open Visual Studio Code.
-
-1. On the File menu, select **Open Folder**.
-
-1. Create a new folder named **APL2003** in a location that is easy to find.
-
-    For example, to create a folder named **APL2003** on the Windows Desktop:
-
-    - In the Open Folder dialog, select **Desktop**.
-    - Select **New folder**.
-    - Type **APL2003** and then press Enter.
-    - Select **Select Folder**.
-    - If prompted, select **Yes, I trust the authors**.
-
-1. On the Terminal menu, select **New Terminal**.
+1. On the Visual Studio Code Terminal menu, select **New Terminal**.
 
 1. At the terminal command prompt, to create a new ASP.NET Web API project, enter the following command:
 
@@ -319,11 +336,19 @@ Complete the following steps to create a WebAPI app and publish to a GitHub repo
     dotnet new webapi --no-https
     ```
 
+
+
+
+
 1. At the terminal command prompt, to add the Swagger package to your project, enter the following command:
 
     ```dotnetcli
     dotnet add package Swashbuckle.AspNetCore.Swagger --version 6.5.0
     ```
+
+
+
+
 
 1. At the terminal command prompt, run the following dotnet CLI command:
 
@@ -346,13 +371,9 @@ Complete the following steps to create a WebAPI app and publish to a GitHub repo
 
 1. Open the Source Control view.
 
-1. Select **Publish to GitHub**.
+1. Commit updates and then Push files to the DevOps repo.
 
-1. If prompted, to enable the GitHub extension to sign in using GitHub, select **Allow**, and then provide authorization in GitHub.
-
-1. In Visual Studio Code, select **Publish to GitHub public repository**.
-
-#### Task 2: Create Docker image and push to Azure Container Registry
+#### Task 3: Create Docker image and push to Azure Container Registry
 
 Complete the following steps to create a Docker image and push the image to your Azure Container Registry.
 
@@ -409,35 +430,7 @@ Complete the following steps to create a Docker image and push the image to your
 
 Complete the following steps to configure Azure DevOps and a starter Pipeline:
 
-1. Open the Azure portal.
-
-1. On the top search bar, in the Search textbox, enter **devops**
-
-1. In the search results, select **Azure DevOps organizations**.
-
-1. Select **My Azure DevOps Organizations**.
-
-1. If you haven’t created an organization, select **Free**.
-
-1. To create a new project, select **New project**.
-
-1. On the Create new project page, enter the following information:
-
-    - Project name: **Project1**
-    - Description: **APL-2003 project**
-    - Visibility: **Public**
-
-1. On the Create new project page, select **Create**.
-
-1. On the left-side menu, select **Repos**.
-
-1. Under Import a repository, select **Import**.
-
-1. On the Import a Git repository page, enter the URL for the GitHub repository you created for your code project, and then select **Import**.
-
-    Your repository URL should be similar to the following example:
-
-    `https://github.com/<your account>/APL2003`
+1. Open the Azure DevOps project.
 
 1. On the left-side menu, select **Pipelines**.
 
