@@ -167,9 +167,27 @@ Complete the following steps to configure a Container Registry instance.
 
 In this exercise, you ensure that scripting and developer tools are configured correctly on the virtual machine.
 
+#### Task 0: Uninstall Visual Studio Code
+
+Complete the following steps to uninstall Visual Studio Code
+
+1. Open the Windows Start menu.
+
+1. On the Start menu, select **Settings**.
+
+1. On the left side menu, select **Apps**, and then select **Installed Apps**.
+
+1. Locate **Microsoft Visual Studio Code**.
+
+1. To the right of Microsoft Visual Studio Code, select the ellipsis (...), and then select **Uninstall**.
+
+1. In the popup window, select **Uninstall**, and then select **Yes**.
+
+1. Select **Ok**, and then close Settings.
+
 #### Task 1: Ensure that Windows PowerShell in installed
 
-Complete the following steps to ensure that Windows PowerShell is installed:
+Complete the following steps to ensure that Windows PowerShell is installed.
 
 1. Open the Windows Start menu.
 
@@ -240,6 +258,16 @@ Complete the following steps to install Docker Desktop.
 #### Task 5: Configure Visual Studio Code with C#, Docker, and Azure App Service extensions
 
 Complete the following steps to configure Visual Studio Code extensions:
+
+1. Open a web browser window, and then navigate to the Visual Studio Code download page: `https://code.visualstudio.com/download`
+
+1. Select **Windows**, and wait for the installer file to download.
+
+1. Open the Visual Studio Code Installer file.
+
+    The file is named VSCodeUserSetup-x64-<version>.exe
+
+1. Accept the license agreement, and then accept the default settings to complete the installation.
 
 1. Open Visual Studio Code.
 
