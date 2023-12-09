@@ -10,7 +10,7 @@ lab:
 
 ## Instructions
 
-In this lab, you deploy and manage an app using Azure Container Apps. To implement the solution, you begin by configuring the development environment with local tools and Azure resources. Once the environment is prepared, you use Azure Container Registry, Azure Container Apps, and Azure Pipelines to deploy and manage your app.  
+In this lab, you will deploy and manage an app using Azure Container Apps. To implement the solution, you begin by configuring a development environment that uses a combination of local tools and Azure resources. Once the environment is prepared, you use Azure Container Registry, Azure Container Apps, and Azure Pipelines to deploy and manage your app.  
 
 By the end of this lab, you're able to:
 
@@ -22,21 +22,22 @@ By the end of this lab, you're able to:
 
 ### Exercise 1: Configure Azure resources
 
-In this exercise, you configure Azure resources that support your Azure Container Apps solution.
+In this exercise, you configure Azure resources that can be used to support an Azure Container Apps solution.
 
 You will complete the following tasks:
 
+- Examine resource group settings.
 - Configure an Azure Virtual Network with subnets.
-- Configure an Azure Service Bus.
-- Configure an Azure Container Registry.
+- Configure an Azure Service Bus resource.
+- Configure an Azure Container Registry resource.
 
 #### Task 1: Examine resource group settings
 
-Complete the following steps to examine resource groups settings.
+Complete the following steps to examine the location setting of the resource group that's used in this lab.
 
 1. In the lab environment, open a browser window, and then navigate to the Azure portal: `https://portal.azure.com/`
 
-    Work with your classroom instructor if need help signing into the Azure portal with a valid subscription/account.
+    Work with your classroom instructor if need help signing into the Azure portal with a subscription/account that's appropriate for this lab.
 
 1. On your Azure portal Home page, under **Navigate**, select **Resource groups**.
 
@@ -48,7 +49,7 @@ Complete the following steps to examine resource groups settings.
 
     You will use the same location/region when creating other Azure resources during this lab.
 
-1. Close the **RG1** page and then close **Resource groups** page.
+1. Close the **RG1** page, and then close the **Resource groups** page.
 
 #### Task 2: Configure a Virtual Network and subnets
 
@@ -113,7 +114,7 @@ Complete the following steps to configure a Service Bus instance.
 
     - Subscription: Ensure that the Azure subscription that you're using for this guided project is selected.
     - Resource group name: Select **RG1**
-    - Namespace name: Enter **sb-apl2003-** followed by your initials and the date. For example: **sb-apl2003-cah12oct**.
+    - Namespace name: Enter **sb-az2003-** followed by your initials and the date. For example: **sb-az2003-cah12oct**.
     - Location: Ensure that specified Location matches the location setting of your resource group.
     - Pricing tier: Select **Basic**.
 
@@ -126,8 +127,6 @@ Complete the following steps to configure a Service Bus instance.
 #### Task 4: Configure Azure Container Registry
 
 Complete the following steps to configure a Container Registry instance.
-
-1. Ensure that you have your Azure portal open in a browser window.
 
 1. On the top search bar of the Azure portal, in the Search textbox, enter **container registry**
 
@@ -142,7 +141,7 @@ Complete the following steps to configure a Container Registry instance.
 
     - Subscription: Ensure that the Azure subscription that you're using for this guided project is selected.
     - Resource group: Select **RG1**.
-    - Registry name: Enter **acrapl2003** followed by your initials and date. For example: **acrapl2003cah12oct**
+    - Registry name: Enter **acraz2003** followed by your initials and date. For example: **acraz2003cah12oct**
     - Location: Ensure that specified Location matches the location setting of your resource group.
     - SKU: Select **Premium**.
 
@@ -184,7 +183,7 @@ Complete the following steps to ensure that Windows PowerShell is installed:
 
 #### Task 2: Configure Azure CLI extensions
 
-Complete the following steps to configure Azure CLI:
+Complete the following steps to configure Azure CLI.
 
 1. Open a command line or terminal application, such as Windows Command Prompt.
 
@@ -202,7 +201,7 @@ Complete the following steps to configure Azure CLI:
 
 #### Task 3: Install Docker Desktop
 
-Complete the following steps to install Docker Desktop:
+Complete the following steps to install Docker Desktop.
 
 1. Open a browser window, and then navigate to the Docker Desktop install page: `https://docs.docker.com/desktop/install/windows-install/`
 
@@ -405,7 +404,7 @@ Complete the following steps to create an app.
 
 Complete the following steps to create a Docker image and push the image to your Azure Container Registry.
 
-1. Ensure that you have your APL2003 code project open in Visual Studio Code.
+1. Ensure that you have your AZ2003 code project open in Visual Studio Code.
 
 1. To create a Dockerfile, run the following command in the Command Palette: **Docker: Add Docker Files to Workspace**.
 
@@ -459,16 +458,16 @@ Complete the following steps to create a Docker image and push the image to your
 
     - Registry provider: Select **Azure**. Follow the online instructions to verify your Azure account if needed.
     - Azure subscription: Select the Azure Subscription that you're using for this guided project.
-    - Select your Azure Container Registry resource. For example: **acrapl2003cah12oct**
+    - Select your Azure Container Registry resource. For example: **acraz2003cah12oct**
 
-        An image tag is generated. For example: `acrapl2003cah12oct.azurecr.io/aspnetcorecontainer:latest`
+        An image tag is generated. For example: `acraz2003cah12oct.azurecr.io/aspnetcorecontainer:latest`
 
     - To push the image to your Container Registry, press Enter.
 
     The following Docker command is executed:
 
     ```azurecli
-    docker image push acrapl2003cah12oct.azurecr.io/aspnetcorecontainer:latest
+    docker image push acraz2003cah12oct.azurecr.io/aspnetcorecontainer:latest
     ```
 
 1. Open the Source Control view, enter a commit message, and then **Commit** and **Sync Changes**.
@@ -730,7 +729,7 @@ You've been asked to configure a container app that meets the following requirem
 
 - Is deployed to VNET1/ACASubnet.
 - Pulls an image from a container registry.
-- Authenticates using a user-assigned managed identity (uai-apl2003).
+- Authenticates using a user-assigned managed identity (uai-az2003).
 - Uses Container App to connect to a Service Bus instance using the .NET client type.
 - The app can run up to two replicas that are added whenever there are 10,000 HTTP concurrent requests.
 
@@ -991,8 +990,8 @@ Complete the following steps to configure your pipelines to use the self-hosted 
     - task: AzureContainerApps@1
       inputs:
         azureSubscription: 'Visual Studio Enterprise(1111aaaa-22bb-33cc-44dd-555555eeeeee)'
-        imageToDeploy: 'acrapl2003cah12oct.azurecr.io/aspnetcorecontainer:latest'
-        containerAppName: 'aca-apl2003'
+        imageToDeploy: 'acraz2003cah12oct.azurecr.io/aspnetcorecontainer:latest'
+        containerAppName: 'aca-az2003'
         resourceGroup: 'RG1'
     ```
 
