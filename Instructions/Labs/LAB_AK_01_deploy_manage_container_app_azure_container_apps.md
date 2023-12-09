@@ -149,7 +149,7 @@ Complete the following steps to configure a Container Registry instance.
 
 1. Once the Validation passed message appears, select **Create**.
 
-1. After the deployment has completed, open the deployed resource.
+1. After the deployment has completed, open your Container registry resource.
 
 1. On the left-side menu of the Container registry page, under **Settings**, select **Networking**.
 
@@ -181,9 +181,11 @@ Complete the following steps to uninstall Visual Studio Code.
 
 1. To the right of Microsoft Visual Studio Code, select the ellipsis (...), and then select **Uninstall**.
 
-1. In the popup window, select **Uninstall**, and then select **Yes**.
+1. In the popup window, select **Uninstall**.
 
-1. Select **Ok**, and then close Settings.
+1. When prompted, select **Yes** and then select **Ok**.
+
+1. Close Settings.
 
 #### Task 1: Ensure that Windows PowerShell in installed
 
@@ -225,13 +227,13 @@ Complete the following steps to install Docker Desktop.
 
 1. Select **Docker Desktop for Windows** and wait for the installer file to download.
 
-1. Open the installer file, and then follow the online instructions to install Docker Desktop.
+1. Open the downloaded installer file, and then follow the online instructions to install Docker Desktop.
 
     The installation process takes about 5 minutes.
 
 1. Once the installation has completed, select **Close and restart**.
 
-1. When the virtual machine restarts, wait for the **Docker Subscription Service Agreement** window to appear.
+1. When the updated virtual machine restarts, wait for the **Docker Subscription Service Agreement** window to appear.
 
 1. On the Docker Subscription Service Agreement page, select **Accept**.
 
@@ -244,6 +246,8 @@ Complete the following steps to install Docker Desktop.
 1. On the Tell us about the work you do page, select **Skip**.
 
 1. Wait for the Docker Engine startup process to complete, and then minimize the Docker Desktop app.
+
+    Do not close Docker Desktop, just minimize it.
 
 #### Task 4: Install the .NET 8 SDK
 
@@ -267,13 +271,9 @@ Complete the following steps to configure Visual Studio Code with extensions.
 
 1. Open the Visual Studio Code Installer file.
 
-    The file is named VSCodeUserSetup-x64-<version>.exe
-
-1. Accept the license agreement, and then accept the default settings to complete the installation.
+1. Accept the license agreement, and then continue to accept the default settings until you complete the installation.
 
 1. Open Visual Studio Code.
-
-    - You will be configuring Visual Studio Code extensions for C#, Docker, and Azure App Service.
 
 1. On the **Activity bar**, select **Extensions**.
 
@@ -289,21 +289,19 @@ Complete the following steps to configure Visual Studio Code with extensions.
 
 1. Wait for the installation to complete.
 
+    The C# Dev Kit takes about 1 minute to install.
+
 1. On the **EXTENSIONS** view, replace **C#** with **docker**.
 
 1. In the filtered list of available extensions, select the extension labeled **Docker**  that's published by Microsoft.
 
 1. To install the extension, select **Install**.
 
-1. Wait for the installation to complete.
-
 1. On the **EXTENSIONS** view, replace **docker** with **azure app service**.
 
 1. In the filtered list of available extensions, select the extension labeled **Azure App Service**  that's published by Microsoft.
 
 1. To install the extension, select **Install**.
-
-1. Wait for the installation to complete.
 
 1. Close Visual Studio Code.
 
@@ -323,7 +321,7 @@ You will complete the following tasks:
 
 Complete the following steps to configure Azure DevOps project.
 
-1. Open the Azure portal.
+1. Open a browser window, and then navigate to the Azure portal: `https://portal.azure.com/`
 
 1. On the top search bar, in the Search textbox, enter **devops**
 
@@ -335,7 +333,7 @@ Complete the following steps to configure Azure DevOps project.
 
 1. On the Get started with Azure DevOps page, select **Create new organization**, and then select **Continue**.
 
-1. On the Almost done page, enter the characters and then select **Continue**.
+1. On the Almost done page, enter the displayed characters, and then select **Continue**.
 
 1. On your Azure DevOps organization page, select **Organization settings**.
 
@@ -384,27 +382,35 @@ Complete the following steps to create an app.
     If you get an error telling you that the term "dotnet" is not recognized, complete the following:
 
     - On the Windows Start menu, open Windows **Settings**.
-    - In Settings, open the **Apps** tab.
+    - In Settings, open the **Apps** tab, and then select **Installed Apps**.
     - Locate **Microsoft .NET SDK 8.0.100 (x64)** in the list of installed apps.
     - To the right of Microsoft .NET SDK 8.0.100 (x64), select the ellipsis (...) and then select **Modify**.
     - To allow the app to make changes, select **Yes**.
     - On the Microsoft .NET SDK 8.0.100 window, select **Repair**.
-    - Once the repair has successfully completed, select Close.
-    - Close Settings.
+    - Once the repair has successfully completed, select **Close**.
+    - Close the Settings window.
     - Switch back to the Visual Studio Code window, and then close Visual Studio Code.
     - Re-open Visual Studio Code.
     - In the Visual Studio Code Terminal, at the command prompt, enter `dotnet --version`
+    - You should see a version number displayed. For example: **8.0.100**.
 
-1. At the terminal command prompt, to configure Git email and username, enter the following commands:
+1. At the terminal command prompt, to configure the Git email setting, use the following command:
 
-    ```dotnetcli
-    git config --global user.email <your lab email address here - for example: LabUser-12345678@labhoster.onmicrosoft.com>
-    git config --global user.name <provide your lan username here - for example: LabUser-12345678>
-    ```
+    Enter **git config --global user.email** followed by the account email information provided in your lab environment
+
+    For example: git config --global user.email LabUser-12345678@labhoster.onmicrosoft.com
+
+1. At the terminal command prompt, to configure Git username, use the following command:
+
+    Enter **git config --global user.name** followed by the account user name information provided in your lab environment
+
+    For example: git config --global user.name LabUser-12345678
 
 1. On the View menu, select Command Palette.
 
-1. At the command prompt, select **.NET: New Project**, select **ASP.NET Core Empty**, and then enter the following information:
+1. At the command prompt, select **.NET: New Project**, select **ASP.NET Core Empty**.
+
+1. Wait for resources to load, and then enter the following information:
 
     - In the Name the new project text box, enter **AZ2003App**
     - Accept the Default directory.
@@ -428,7 +434,9 @@ Complete the following steps to create an app.
 
 1. In the commit message text box, enter **initial commit**.
 
-1. Commit updates and then Push files to the DevOps repo.
+1. Commit updates and then Sync files to the DevOps repo.
+
+1. On the Git Credential Manager dialog, enter your lab environment credentials (Username and Password).
 
 #### Task 3: Create Docker image and push to Azure Container Registry
 
@@ -436,69 +444,35 @@ Complete the following steps to create a Docker image and push the image to your
 
 1. Ensure that you have your AZ2003 code project open in Visual Studio Code.
 
-1. To create a Dockerfile, run the following command in the Command Palette: **Docker: Add Docker Files to Workspace**.
+1. To create a Dockerfile, run the following command from the Command Palette: **Docker: Add Docker Files to Workspace**.
 
 1. When prompted, specify the following information:
 
     - Application Platform: **.NET ASP.NET Core**.
     - Operating System: **Linux**.
     - Ports: **5000**.
-
-1. When prompted, add Docker Files to the project.
+    - Add Docker Compose Files: **No**
 
 1. To create a Docker image, run the following command in the Command Palette: **Docker Images: Build Image**.
 
+1. Wait for the image build process to complete, and then close the Terminal.
+
+1. On the left side menu, open the Docker view.
+
+1. In the DOCKER view, under Registries, select **Azure**, your subscription, and the Azure Container Registry that you created.
+
 1. To push the Docker image to the Azure Container Registry, run the following command in the Command Palette: **Docker Images: Push**.
 
-1. When the command runs, enter the following information:
+1. When the command runs, complete the following steps:
 
-    - Select the docker image name that you created: `aspnetcorecontainer`
-    - Select the image tag that you created: `latest`
+    - Select image group: select **az2003project**
+    - Select image (tag): select **latest**
+    - Select registry provider: select **Azure**
+    - Select your subscription.
+    - Select an Azure Container Registry to push to: select the container registry that you created. For example: acraz2003cah12oct.
+    - Tag image as: press Enter.
 
-
-
-
-
-
-
-1. At a terminal command prompt, run the following docker CLI command:
-
-    ```azurecli
-    docker build --tag aspnetcorecontainer:latest .
-    ```
-
-    The syntax for the build command is: `docker build --tag <image name>:<image tag> .`
-
-    This command builds a container image that is hosted by Docker and accessible using the Docker extension for VS Code.
-
-1. Open the Visual Studio Code Command Palette, and then run the following command: **Docker Images: Push**.
-
-1. When the command runs, enter the following information:
-
-    - Select the docker image name that you created: `aspnetcorecontainer`
-
-    - Select the image tag that you created: `latest`
-
-
-
-
-
-
-1. If you see a message stating that no registry is connected, select **Connect Registry**, and then enter the following information:
-
-    - Registry provider: Select **Azure**. Follow the online instructions to verify your Azure account if needed.
-    - Azure subscription: Select the Azure Subscription that you're using for this guided project.
-    - Select your Azure Container Registry resource. For example: **acraz2003cah12oct**
-
-        An image tag is generated. For example: `acraz2003cah12oct.azurecr.io/aspnetcorecontainer:latest`
-
-    - To push the image to your Container Registry, press Enter.
-
-    The following Docker command is executed:
-
-    ```azurecli
-    docker image push acraz2003cah12oct.azurecr.io/aspnetcorecontainer:latest
-    ```
+1. Wait for the image push process to complete, and then close the Terminal.
 
 1. Open the Source Control view, enter a commit message, and then **Commit** and **Sync Changes**.
 
@@ -534,7 +508,7 @@ For an Azure Pipeline to build and deploy Windows, Azure, and other Visual Studi
 
 Complete the following steps to deploy a self-hosted Windows agent:
 
-1. Navigate to the home page of your DevOps organization
+1. Navigate to the home page of your DevOps organization.
 
 1. In the upper right corner, select **User settings**.
 
@@ -554,7 +528,9 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
 1. On the Success page, to copy the token, select **Copy to clipboard** and then select **Close**.
 
-    You use this token when you configure the agent.
+1. Save a copy of the token to Notepad.
+
+    You will use this token when you configure the agent.
 
 1. Navigate to your DevOps organization, and then select **Organization settings**.
 
@@ -562,17 +538,17 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
 1. If the **Get the agent** dialog box opens, skip to the next step, otherwise complete the following steps:
 
-    1. To select the default pool, select **default**.
+    1. To select the default pool, select **Default**.
 
         If the **default** pool doesn't exist, select **Add pool**, and then enter the following information:
 
         1. Under Pool type, select **Self-hosted**.
 
-        1. Under Name, enter **default**
+        1. Under Name, enter **Default**
 
         1. Select **Create**.
 
-        1. To open the pool that you just created, select **default**.
+        1. To open the pool that you just created, select **Default**.
 
     1. Under Default, select the **Agents** tab, and then select **New agent**.
 
@@ -584,9 +560,11 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
     1. On the right side pane, select **Download**.
 
+1. Wait for the download to complete.
+
 1. Close the Get the agent dialog.
 
-    The following instruction steps describe the "Create the agent" process.
+    The next series of instruction steps walk you through the "Create the agent" process.
 
 1. Use Windows File Explorer to create the following folder location for the agent:
 
@@ -594,7 +572,9 @@ Complete the following steps to deploy a self-hosted Windows agent:
     C:\agents
     ```
 
-1. Unpack the agent zip file into the directory you created.
+1. Use Windows File Explorer to unpack the downloaded agent zip file into the agents directory that you just created.
+
+1. Wait for the file extraction process to complete, and then close File Explorer.
 
 1. Open PowerShell as an Administrator, navigate to the agents directory, and then enter the following PowerShell command:
 
@@ -606,7 +586,7 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
     - Enter server URL >: enter the URL for your DevOps organization. Such as: `https://dev.azure.com/<your organization>`
     - Enter authentication type (press enter for PAT) >: press Enter.
-    - Enter personal access token >: Paste-in the personal access token that you copied to the clipboard earlier.
+    - Enter personal access token >: Paste-in the personal access token that you copied to Notepad.
     - Enter agent pool (press enter for default) >: press Enter.
     - Enter agent name (press enter for YOUR-PC-NAME) > enter **az2003-agent**
     - Enter work folder (press enter for _work) >: press Enter.
@@ -618,6 +598,8 @@ Complete the following steps to deploy a self-hosted Windows agent:
     A message informing you that the agent started successfully is displayed.
 
     For extra help, see the following documentation: `https://learn.microsoft.com/azure/devops/pipelines/agents/windows-agent`
+
+1. Close Windows PowerShell.
 
 ### Exercise 4: Configure Azure Container Registry for a secure connection with Azure Container Apps
 
@@ -640,15 +622,11 @@ You've been asked to configure your Azure resources to meet the following requir
 
 Complete the following steps to configure a user-assigned managed identity.
 
-1. Open your Azure portal
+1. Open your Azure portal.
 
-1. On the portal menu, select **+ Create a resource**.
-
-1. On the Create a resource page, in the Search services and marketplace text box, enter **managed identity**
+1. In the top search bar of the Azure portal, enter **managed identity**
 
 1. In the filtered list of resources, select **User Assigned Managed Identity**.
-
-1. On the User Assigned Managed Identity page, select **Create**.
 
 1. On the Create User Assigned Managed Identity page, specify the following information:
 
@@ -692,6 +670,8 @@ Complete the following steps to configure Container Registry with AcrPull permis
 1. On the Review + assign tab, select **Review + assign**.
 
 1. Wait for the role assignment to be added.
+
+    You can check the Role assignments tab to verify that uai-az2003 has been assigned the AcrPull role.
 
 #### Task 3: Configure your container registry with a private endpoint connection
 
@@ -741,7 +721,7 @@ Complete the following steps to configure your container registry with a private
 
 1. Wait for the deployment to complete.
 
-1. Close the private endpoint deployment page.
+1. When you see **Your deployment is complete** displayed, close the private endpoint deployment page.
 
 ### Exercise 5: Create and configure a container app in Azure Container Apps
 
@@ -779,22 +759,18 @@ You complete the following tasks during this exercise:
 
 Complete the following steps to create a container app that uses an ACR image.
 
-1. Ensure that you have your Azure portal open.
+1. In the top search bar of the Azure portal, enter **container app**
 
-1. On the portal menu, select **+ Create a resource**.
+1. In the filtered list of resources, select **Container Apps**.
 
-1. On the top search bar, in the Search textbox, enter **container app**
-
-1. In the search results under Services, select **Container App**.
-
-1. Select **Create**.
+1. On the Container Apps page, select **Create container app**.
 
 1. On the Basics tab, specify the following:
 
     - Subscription: Specify the Azure subscription that you're using for this guided project.
     - Resource group: **RG1**
     - Container app name: **aca-az2003**
-    - Region: Ensure that specified Region matches the region setting of VNET1.
+    - Region: Ensure that specified Region matches the region setting of VNET1 (which should match your resource group location).
 
         The container app needs to be in the same region/location as the virtual network so you can choose VNET1 for the managed environment. For this guided project, keep all of your resources in the region/location specified for your resource group.
 
@@ -807,7 +783,7 @@ Complete the following steps to create a container app that uses an ACR image.
     - Infrastructure subnet: **ACASubnet**.
 
     > [!NOTE]
-    > If the ACASubnet subnet is not listed, open your virtual network resource, adjust the subnet address range to **10.0.2.0/23** and retry the steps to create the Container App.
+    > If the ACASubnet subnet is not listed, cancel this create process, open your virtual network resource, adjust the subnet address range to **10.0.2.0/23**, and then restart the steps to create the Container App resource.
 
 1. On the Create Container Apps Environment page, select **Create**.
 
@@ -827,7 +803,7 @@ Complete the following steps to create a container app that uses an ACR image.
 1. Wait for the deployment to complete.
 
     > [!NOTE]
-    > This deployment can take 10 minutes to complete.
+    > This deployment can take 5-10 minutes to complete.
 
 #### Task 2: Configure the container app to authenticate using the user assigned identity
 
@@ -905,6 +881,8 @@ Complete the following steps to configure HTTP scale rules for your Container Ap
 
 1. Ensure that your new scale rule is displayed.
 
+    If the scale rule is not displayed after refreshing, check the Revisions tab to see the current active revision, and then adjust the selected Revision on the Scale and replicas page if needed.
+
 ### Exercise 6: Configure continuous integration by using Azure Pipelines
 
 In this exercise, you deploy a container app from an image in the Azure Container Registry to the Azure Container Apps platform.
@@ -978,14 +956,24 @@ Complete the following steps to configure your pipelines to use the self-hosted 
 
 1. In the Azure portal tab, open your Container App resource, and then open the Containers page.
 
-1. Use the information on the Containers page to configure the following Pipeline1 Task information:
+1. Copy the following information to Notepad.
 
-    - Docker Image to Deploy: Registry/Image:Image tag (replace with your information)
-    - Azure Container App name: Name
+    - Name
+    - Registry
+    - Image
+    - Tag
 
-1. Configure the following `Pipeline1` Task information:
+1. Use the information that you copied from the Containers page to configure the following Task information fields:
 
-    - Azure Resource group name: **RG1**
+    - Docker Image to Deploy: Registry/Image:Image tag (replace with your information from Notepad)
+    - Azure Container App name: Name (replace with your information from Notepad)
+
+    For example:
+
+    - Docker Image to Deploy: acraz2003cah12oct.azurecr.io/az2003project:latest
+    - Azure Container App name: aca-az2003
+
+1. In the Azure Resource group name field, enter **RG1**
 
     > [!NOTE]
     > If you need to verify the resource group name, you can find it on the Overview page of your Container App resource.
@@ -1025,7 +1013,7 @@ Complete the following steps to configure your pipelines to use the self-hosted 
         resourceGroup: 'RG1'
     ```
 
-1. Select **Save**, and then select **Save** again to commit.
+1. On your Pipeline1 page, select **Save**, enter a commit message, and then select **Save** again to commit.
 
 #### Task 3: Run the Pipeline1 deployment task
 
@@ -1037,11 +1025,13 @@ Complete the following steps to configure your pipelines to use the self-hosted 
 
     A pipeline page opens to display the associated job. The job section displays job status, which progresses from Queued to Waiting.
 
-    It can take a couple minutes for the status to transition from Queued to Waiting.
+1. Check to see if 'Permission needed' is displayed under Job.
 
-1. If 'Permission needed' is displayed under Job,  requires permission to proceed (), view the requirement and provide the required permissions.
+    If the job requires permission to proceed, select **View**, and then select **Permit** to provide the required permissions.
 
 1. Monitor the status of the run operation and verify that the run is successful.
+
+    It can take a few minutes for queued job to start running. The job status should change to "Success".
 
 ### Exercise 7: Manage revisions in Azure Container Apps
 
@@ -1079,7 +1069,7 @@ You complete the following tasks during this exercise:
 
 1. In the Azure portal, open your container app resource.
 
-1. On the left side menu, under Revisions, select **Revisions**.
+1. On the left side menu, under Application, select **Revisions**.
 
 1. At the top of the Revisions page, select **Choose revision mode**.
 
@@ -1087,7 +1077,7 @@ You complete the following tasks during this exercise:
 
 1. On the Revisions page, wait for the **Revision Mode** setting to update.
 
-    The Revision Mode will be set to **Multiple** after the update.
+    The Revision Mode will be set to **Multiple** after the update is complete.
 
 #### Task 2: Create a new revision with a v2 suffix
 
