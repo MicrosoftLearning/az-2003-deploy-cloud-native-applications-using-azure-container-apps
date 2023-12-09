@@ -247,7 +247,7 @@ Complete the following steps to install Docker Desktop.
 
 1. Wait for the Docker Engine startup process to complete, and then minimize the Docker Desktop app.
 
-    Do not close Docker Desktop, just minimize it.
+    Do not close Docker Desktop, just minimize the running app.
 
 #### Task 4: Install the .NET 8 SDK
 
@@ -387,7 +387,7 @@ Complete the following steps to create an app.
     - To the right of Microsoft .NET SDK 8.0.100 (x64), select the ellipsis (...) and then select **Modify**.
     - To allow the app to make changes, select **Yes**.
     - On the Microsoft .NET SDK 8.0.100 window, select **Repair**.
-    - Once the repair has successfully completed, select **Close**.
+    - Wait for the repair operation to complete successfully, and then select **Close**.
     - Close the Settings window.
     - Switch back to the Visual Studio Code window, and then close Visual Studio Code.
     - Re-open Visual Studio Code.
@@ -406,9 +406,9 @@ Complete the following steps to create an app.
 
     For example: git config --global user.name LabUser-12345678
 
-1. On the View menu, select Command Palette.
+1. On the View menu, select **Command Palette**.
 
-1. At the command prompt, select **.NET: New Project**, select **ASP.NET Core Empty**.
+1. At the command prompt, select **.NET: New Project**, and then select **ASP.NET Core Empty**.
 
 1. Wait for resources to load, and then enter the following information:
 
@@ -434,7 +434,9 @@ Complete the following steps to create an app.
 
 1. In the commit message text box, enter **initial commit**.
 
-1. Commit updates and then Sync files to the DevOps repo.
+1. Select **Commit**, and then select **Yes** to stage and commit changes.
+
+1. Select **Sync Changes**, and then select **OK** to sync your files to the DevOps repo.
 
 1. On the Git Credential Manager dialog, enter your lab environment credentials (Username and Password).
 
@@ -451,15 +453,23 @@ Complete the following steps to create a Docker image and push the image to your
     - Application Platform: **.NET ASP.NET Core**.
     - Operating System: **Linux**.
     - Ports: **5000**.
-    - Add Docker Compose Files: **No**
+    - Include Docker Compose Files: **No**
 
 1. To create a Docker image, run the following command in the Command Palette: **Docker Images: Build Image**.
 
 1. Wait for the image build process to complete, and then close the Terminal.
 
-1. On the left side menu, open the Docker view.
+1. On the left side menu, to open the Docker view, select Docker.
 
-1. In the DOCKER view, under Registries, select **Azure**, your subscription, and the Azure Container Registry that you created.
+1. In the DOCKER view, under Registries, select **Connect Registry**, and then select **Azure Azure Container Registry**.
+
+1. In the DOCKER view, expand **Azure**, and then select **Allow**.
+
+1. In the browser window, select the Azure account that you're using for this lab.
+
+1. Return to Visual Studio Code.
+
+1. In the DOCKER view, expand the Azure subscription, and verify that the Azure Container Registry that you created is listed.
 
 1. To push the Docker image to the Azure Container Registry, run the following command in the Command Palette: **Docker Images: Push**.
 
@@ -470,7 +480,7 @@ Complete the following steps to create a Docker image and push the image to your
     - Select registry provider: select **Azure**
     - Select your subscription.
     - Select an Azure Container Registry to push to: select the container registry that you created. For example: acraz2003cah12oct.
-    - Tag image as: press Enter.
+    - To deploy the image, press Enter.
 
 1. Wait for the image push process to complete, and then close the Terminal.
 
@@ -528,7 +538,7 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
 1. On the Success page, to copy the token, select **Copy to clipboard** and then select **Close**.
 
-1. Save a copy of the token to Notepad.
+1. Open Notepad, and then save a copy of the token to Notepad.
 
     You will use this token when you configure the agent.
 
@@ -576,7 +586,7 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
 1. Wait for the file extraction process to complete, and then close File Explorer.
 
-1. Open PowerShell as an Administrator, navigate to the agents directory, and then enter the following PowerShell command:
+1. Open Windows PowerShell as an Administrator, navigate to the agents directory, and then enter the following PowerShell command:
 
     ```powershell
     .\config
@@ -671,7 +681,7 @@ Complete the following steps to configure Container Registry with AcrPull permis
 
 1. Wait for the role assignment to be added.
 
-    You can check the Role assignments tab to verify that uai-az2003 has been assigned the AcrPull role.
+    A notification will appear, but if you miss it, you can check the Role assignments tab to verify that uai-az2003 has been assigned the AcrPull role.
 
 #### Task 3: Configure your container registry with a private endpoint connection
 
@@ -783,7 +793,7 @@ Complete the following steps to create a container app that uses an ACR image.
     - Infrastructure subnet: **ACASubnet**.
 
     > [!NOTE]
-    > If the ACASubnet subnet is not listed, cancel this create process, open your virtual network resource, adjust the subnet address range to **10.0.2.0/23**, and then restart the steps to create the Container App resource.
+    > If the ACASubnet subnet is not listed, cancel this create process, open your virtual network resource, adjust the ACASubnet address range to **10.0.2.0/23**, and then restart the steps to create the Container App resource.
 
 1. On the Create Container Apps Environment page, select **Create**.
 
@@ -843,6 +853,8 @@ Complete the following steps to configure a connection between the container app
 1. Once the Validation passed message appears, select **Create**.
 
 1. Wait for the connection to be created.
+
+     The Service Bus connection will be listed on the Service Connector (preview) page.
 
 #### Task 4: Configure HTTP scale rules
 
@@ -913,7 +925,7 @@ You complete the following tasks during this exercise:
 
 1. Verify the configuration.
 
-#### Task 1: Configure Pipeline1` to use the self-hosted agent pool
+#### Task 1: Configure Pipeline1 to use the self-hosted agent pool
 
 Complete the following steps to configure your pipelines to use the self-hosted agent pool.
 
@@ -961,7 +973,7 @@ Complete the following steps to configure your pipelines to use the self-hosted 
     - Name
     - Registry
     - Image
-    - Tag
+    - Image tag
 
 1. Use the information that you copied from the Containers page to configure the following Task information fields:
 
@@ -1031,7 +1043,7 @@ Complete the following steps to configure your pipelines to use the self-hosted 
 
 1. Monitor the status of the run operation and verify that the run is successful.
 
-    It can take a few minutes for queued job to start running. The job status should change to "Success".
+    It can take a few minutes for queued job to start running. After a minute or so, the job status should change from "Running" to "Success".
 
 ### Exercise 7: Manage revisions in Azure Container Apps
 
@@ -1095,6 +1107,8 @@ You complete the following tasks during this exercise:
 1. Wait for the deployment to be completed.
 
 #### Task 3: Configure labels on the revisions
+
+Ingress must be enable before you can configure revision labels or traffic splitting.
 
 1. On the left-side menu, under Settings, select **Ingress**.
 
