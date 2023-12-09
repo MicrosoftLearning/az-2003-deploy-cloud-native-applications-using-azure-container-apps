@@ -169,7 +169,7 @@ In this exercise, you ensure that scripting and developer tools are configured c
 
 #### Task 0: Uninstall Visual Studio Code
 
-Complete the following steps to uninstall Visual Studio Code
+Complete the following steps to uninstall Visual Studio Code.
 
 1. Open the Windows Start menu.
 
@@ -247,6 +247,8 @@ Complete the following steps to install Docker Desktop.
 
 #### Task 4: Install the .NET 8 SDK
 
+Complete the following steps to install the .NET 8 SDK.
+
 1. Open a web browser window, and then navigate to the .NET 8 SDK download page: `https://dotnet.microsoft.com/download`
 
 1. Select **.NET SDK x64**
@@ -257,7 +259,7 @@ Complete the following steps to install Docker Desktop.
 
 #### Task 5: Configure Visual Studio Code with C#, Docker, and Azure App Service extensions
 
-Complete the following steps to configure Visual Studio Code extensions:
+Complete the following steps to configure Visual Studio Code with extensions.
 
 1. Open a web browser window, and then navigate to the Visual Studio Code download page: `https://code.visualstudio.com/download`
 
@@ -319,7 +321,7 @@ You will complete the following tasks:
 
 #### Task 1: Configure Azure DevOps project and initialize code repo
 
-Complete the following steps to configure Azure DevOps project:
+Complete the following steps to configure Azure DevOps project.
 
 1. Open the Azure portal.
 
@@ -502,7 +504,7 @@ Complete the following steps to create a Docker image and push the image to your
 
 #### Task 3: Configure Azure DevOps and a starter Pipeline
 
-Complete the following steps to configure Azure DevOps and a starter Pipeline:
+Complete the following steps to configure Azure DevOps and a starter Pipeline.
 
 1. Open the Azure DevOps project.
 
