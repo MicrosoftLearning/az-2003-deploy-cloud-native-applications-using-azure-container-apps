@@ -1,4 +1,4 @@
-# INF99X: Sample Course
+# AZ-2003: Deploy cloud-native applications using Azure Container Apps
 
 **Are you an MCT?** - Have a look at our [GitHub User Guide for MCTs](https://microsoftlearning.github.io/MCT-User-Guide/)
 
