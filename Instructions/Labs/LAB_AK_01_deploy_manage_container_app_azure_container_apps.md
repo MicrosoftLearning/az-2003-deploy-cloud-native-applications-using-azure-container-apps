@@ -14,17 +14,17 @@ In this lab, you'll deploy and manage an app using Azure Container Apps. To impl
 
 By the end of this lab, you're able to:
 
-1. Configure a secure connection between an Azure Container Registry and an Azure Container Apps
-1. Create and configure a container app in Azure Container Apps
-1. Configure continuous integration by using Azure Pipelines
-1. Scale a deployed app in Azure Container Apps
-1. Manage revisions in Azure Container Apps
+1. Configure a secure connection between an Azure Container Registry and an Azure Container Apps.
+1. Create and configure a container app in Azure Container Apps.
+1. Configure continuous integration by using Azure Pipelines.
+1. Scale a deployed app in Azure Container Apps.
+1. Manage revisions in Azure Container Apps.
 
 ### Exercise 1: Configure Azure resources
 
-In this exercise, you configure Azure resources that can be used to support an Azure Container Apps solution.
+In this exercise, you'll configure Azure resources that support your Azure Container Apps solution.
 
-It will take about 10 minutes to complete the following tasks:
+It will take about 10-15 minutes to complete the following tasks:
 
 - Examine resource group settings.
 - Configure an Azure Virtual Network with subnets.
@@ -167,12 +167,12 @@ Complete the following steps to configure a Container Registry instance.
 
 In this exercise, you ensure that scripting and developer tools are configured correctly on the virtual machine.
 
-It will take about 20 minutes to complete the following tasks:
+It will take about 20-25 minutes to complete the following tasks:
 
-- Configure Azure CLI extensions
-- Install Docker Desktop
-- Install the .NET 8 SDK
-- Update Visual Studio Code and configure extensions
+- Configure Azure CLI extensions.
+- Install Docker Desktop.
+- Install the .NET 8 SDK.
+- Update Visual Studio Code and configure extensions.
 
 #### Task 1: Uninstall Visual Studio Code
 
@@ -509,7 +509,7 @@ Complete the following steps to create an Azure Pipeline named Pipeline1.
 
 For an Azure Pipeline to build and deploy Windows, Azure, and other Visual Studio solutions you need at least one Windows agent in the host environment.
 
-Complete the following steps to deploy a self-hosted Windows agent:
+Complete the following steps to deploy a self-hosted Windows agent.
 
 1. Navigate to the home page of your DevOps organization.
 
@@ -606,7 +606,7 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
 ### Exercise 4: Configure Azure Container Registry for a secure connection with Azure Container Apps
 
-You've been asked to configure Azure resources to meet the following requirements:
+You've been asked to configure Azure resources that meet the following requirements:
 
 - Your resource group must include a user-assigned managed identity.
 - Your container registry must be able to use the managed identity to pull artifacts.
@@ -924,6 +924,8 @@ Complete the following steps to configure your pipelines to use the self-hosted 
 
 #### Task 2: Configure Pipeline1 with an Azure Container Apps deployment task
 
+Complete the following steps to configure Pipeline1 with an Azure Container Apps deployment task.
+
 1. Ensure that you have Pipeline1 open for editing.
 
 1. On the right side under Tasks, in the Search tasks field, enter **azure container**
@@ -995,6 +997,8 @@ Complete the following steps to configure your pipelines to use the self-hosted 
 
 #### Task 3: Run the Pipeline1 deployment task
 
+Complete the following steps to run the Pipeline1 deployment task.
+
 1. Ensure that you have Pipeline1 open in Azure DevOps.
 
 1. To run the AzureContainerApps task, select **Run**.
@@ -1030,6 +1034,8 @@ It will take about 5-10 minutes to complete the following tasks:
 
 #### Task 1: Set revision management to multiple
 
+Complete the following steps to set revision management to multiple.
+
 1. In the Azure portal, open your container app resource.
 
 1. On the left side menu, under Application, select **Revisions**.
@@ -1043,6 +1049,8 @@ It will take about 5-10 minutes to complete the following tasks:
     The Revision Mode will be set to **Multiple** after the update is complete.
 
 #### Task 2: Create a new revision with a v2 suffix
+
+Complete the following steps to create a new revision with a v2 suffix.
 
 1. In the Azure portal, ensure that you have the Revisions page of your container app resource open.
 
@@ -1060,6 +1068,8 @@ It will take about 5-10 minutes to complete the following tasks:
 #### Task 3: Configure labels on the revisions
 
 Ingress must be enabled before you can configure revision labels or traffic splitting.
+
+Complete the following steps to configure labels on the revisions.
 
 1. On the left-side menu, under Settings, select **Ingress**.
 
@@ -1094,6 +1104,8 @@ Ingress must be enabled before you can configure revision labels or traffic spli
 1. Wait for the Ingress setting to update.
 
 #### Task 4: Configure a traffic percentage on the revisions
+
+Complete the following steps to configure a traffic percentage on the revisions.
 
 1. Ensure that you have the Revisions page open.
 
