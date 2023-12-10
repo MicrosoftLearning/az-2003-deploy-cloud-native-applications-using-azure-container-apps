@@ -10,7 +10,7 @@ lab:
 
 ## Instructions
 
-In this lab, you will deploy and manage an app using Azure Container Apps. To implement the solution, you begin by configuring a development environment that uses a combination of local tools and Azure resources. Once the environment is prepared, you use Azure Container Registry, Azure Container Apps, and Azure Pipelines to deploy and manage your app.  
+In this lab, you'll deploy and manage an app using Azure Container Apps. To implement the solution, you begin by configuring a development environment that uses a combination of local tools and Azure resources. Once the environment is prepared, you use Azure Container Registry, Azure Container Apps, and Azure Pipelines to deploy and manage your app.  
 
 By the end of this lab, you're able to:
 
@@ -24,7 +24,7 @@ By the end of this lab, you're able to:
 
 In this exercise, you configure Azure resources that can be used to support an Azure Container Apps solution.
 
-You will complete the following tasks:
+It will take about 10 minutes to complete the following tasks:
 
 - Examine resource group settings.
 - Configure an Azure Virtual Network with subnets.
@@ -167,7 +167,14 @@ Complete the following steps to configure a Container Registry instance.
 
 In this exercise, you ensure that scripting and developer tools are configured correctly on the virtual machine.
 
-#### Task 0: Uninstall Visual Studio Code
+It will take about 20 minutes to complete the following tasks:
+
+- Configure Azure CLI extensions
+- Install Docker Desktop
+- Install the .NET 8 SDK
+- Update Visual Studio Code and configure extensions
+
+#### Task 1: Uninstall Visual Studio Code
 
 Complete the following steps to uninstall Visual Studio Code.
 
@@ -186,20 +193,6 @@ Complete the following steps to uninstall Visual Studio Code.
 1. When prompted, select **Yes** and then select **Ok**.
 
 1. Close Settings.
-
-#### Task 1: Ensure that Windows PowerShell in installed
-
-Complete the following steps to ensure that Windows PowerShell is installed.
-
-1. Open the Windows Start menu.
-
-1. In the Search textbox, enter **windows powershell**
-
-1. Verify that the Windows PowerShell app is listed.
-
-    If Windows PowerShell isn't installed, open a browser window, installation instructions can be found here: `https://learn.microsoft.com/powershell/scripting/install/installing-powershell`
-
-1. Close the Start menu.
 
 #### Task 2: Configure Azure CLI extensions
 
@@ -307,17 +300,17 @@ Complete the following steps to configure Visual Studio Code with extensions.
 
 ### Exercise 3: Create and configure app deployment resources
 
-In this exercise, you create and deploy a container app, and deploy a self-hosted Windows agent.
+In this exercise, you configure an Azure DevOps project and Azure Pipeline, create and push a Docker image to your Container Registry, and deploy a self-hosted Windows agent.
 
-You will complete the following tasks:
+It will take about 40 minutes to complete the following tasks:
 
-- Configure an Azure DevOps project and initialize code repo.
-- Create a WebAPI app in Visual Studio Code.
-- Create Docker image and push the image to Azure Container Registry.
-- Push code to Azure DevOps project and configure a starter pipeline.
+- Configure an Azure DevOps project and initialize your code repository.
+- Create a .NET app and sync to your Azure DevOps repository.
+- Create a Docker image and push the image to your Azure Container Registry.
+- Create an Azure Pipeline named Pipeline1.
 - Deploy a self-hosted Windows agent.
 
-#### Task 1: Configure Azure DevOps project and initialize code repo
+#### Task 1: Configure Azure DevOps project and initialize code repository
 
 Complete the following steps to configure Azure DevOps project.
 
@@ -367,9 +360,9 @@ Complete the following steps to configure Azure DevOps project.
 
 1. On the Would you like to open the cloned repository dialog, select **Open**, and then select **Yes, I trust the authors**.
 
-#### Task 2: Create a WebAPI app and publish to a GitHub repository
+#### Task 2: Create a .NET app and sync to your Azure DevOps repository
 
-Complete the following steps to create an app.
+Complete the following steps to create a .NET app and sync to your Azure DevOps repository.
 
 1. On the Visual Studio Code Terminal menu, select **New Terminal**.
 
@@ -440,7 +433,7 @@ Complete the following steps to create an app.
 
 1. On the Git Credential Manager dialog, enter your lab environment credentials (Username and Password).
 
-#### Task 3: Create Docker image and push to Azure Container Registry
+#### Task 3: Create a Docker image and push the image to your Azure Container Registry
 
 Complete the following steps to create a Docker image and push the image to your Azure Container Registry.
 
@@ -486,9 +479,9 @@ Complete the following steps to create a Docker image and push the image to your
 
 1. Open the Source Control view, enter a commit message, and then **Commit** and **Sync Changes**.
 
-#### Task 3: Configure Azure DevOps and a starter Pipeline
+#### Task 4: Create an Azure Pipeline named Pipeline1
 
-Complete the following steps to configure Azure DevOps and a starter Pipeline.
+Complete the following steps to create an Azure Pipeline named Pipeline1.
 
 1. Open the Azure DevOps project.
 
@@ -512,7 +505,7 @@ Complete the following steps to configure Azure DevOps and a starter Pipeline.
 
     1. In the Rename/move pipeline dialog, under Name, enter **Pipeline1** and then select **Save**.
 
-#### Task 4: Deploy a self-hosted Windows agent
+#### Task 5: Deploy a self-hosted Windows agent
 
 For an Azure Pipeline to build and deploy Windows, Azure, and other Visual Studio solutions you need at least one Windows agent in the host environment.
 
@@ -613,20 +606,20 @@ Complete the following steps to deploy a self-hosted Windows agent:
 
 ### Exercise 4: Configure Azure Container Registry for a secure connection with Azure Container Apps
 
-In this exercise, you configure a container registry instance for a secure connection from a container app.
-
-The following Azure resources must be available in your Resource group named RG1:
-
-- A Container Registry instance that contains one image.
-- A Virtual Network with subnets.
-- Service Bus Namespace
-
-You've been asked to configure your Azure resources to meet the following requirements:
+You've been asked to configure Azure resources to meet the following requirements:
 
 - Your resource group must include a user-assigned managed identity.
 - Your container registry must be able to use the managed identity to pull artifacts.
 - Access for the managed identity must be limited using the principle of least privilege.
 - Your container registry must be accessible from a private endpoint on VNET1/PESubnet.
+
+In this exercise, you'll configure a container registry instance for a secure connection with a container app.
+
+It will take about 10 minutes to complete the following tasks:
+
+- Configure a user-assigned managed identity.
+- Configure your container registry with AcrPull permissions for the managed identity.
+- Configure your container registry with a private endpoint connection.
 
 #### Task 1: Configure a user-assigned managed identity
 
@@ -735,39 +728,26 @@ Complete the following steps to configure your container registry with a private
 
 ### Exercise 5: Create and configure a container app in Azure Container Apps
 
-In this exercise, you deploy a container app from an image in the Azure Container Registry to the Azure Container Apps platform.
-
-The following Azure resources must be available in your Resource group named RG1:
-
-- A Container registry instance that contains one image.
-- A Virtual network with subnets.
-- A Service Bus Namespace
-- A Managed Identity
-- A Private endpoint
-
-You've been asked to configure a container app that meets the following requirements:
+You've been asked to configure a Container App that meets the following requirements:
 
 - Is deployed to VNET1/ACASubnet.
 - Pulls an image from a container registry.
 - Authenticates using a user-assigned managed identity (uai-az2003).
 - Uses Container App to connect to a Service Bus instance using the .NET client type.
-- The app can run up to two replicas that are added whenever there are 10,000 HTTP concurrent requests.
+- The app can run up to two replicas that are added whenever there are 1000 concurrent HTTP requests.
 
-You complete the following tasks during this exercise:
+In this exercise, you'll deploy a container app from an image in the Azure Container Registry to the Azure Container Apps platform.
 
-1. Create a container app that uses an ACR image
+It will take about 20-25 minutes to complete the following tasks:
 
-1. Configure the container app to authenticate using the user assigned identity
+- Create a Container App that uses an Azure Container Registry image.
+- Configure the container app to authenticate using the user assigned identity.
+- Configure a connection between the container app and Service Bus.
+- Configure HTTP scale rules.
 
-1. Configure a connection between the container app and Service Bus
+#### Task 1:  Create a Container App that uses an Azure Container Registry image
 
-1. Configure HTTP scale rules
-
-1. Verify the configuration
-
-#### Task 1:  Create a container app that uses an ACR image
-
-Complete the following steps to create a container app that uses an ACR image.
+Complete the following steps to create a Container App that uses an Azure Container Registry image.
 
 1. In the top search bar of the Azure portal, enter **container app**
 
@@ -897,33 +877,19 @@ Complete the following steps to configure HTTP scale rules for your Container Ap
 
 ### Exercise 6: Configure continuous integration by using Azure Pipelines
 
-In this exercise, you deploy a container app from an image in the Azure Container Registry to the Azure Container Apps platform.
-
-The following Azure resources must be available in your Resource group named RG1:
-
-- A Container registry instance that contains one image.
-- A Virtual network with subnets.
-- A Service Bus Namespace
-- A Managed Identity
-- A Private endpoint
-- A Container App
-- A Container Apps Environment
-
 You've been asked to configure a continuous integration environment for Container Apps that meets the following requirements:
 
 - You need an Azure Container Apps deployment task in your ADO environment.
 - Pipeline1 must deploy a container image from your container registry to your container app using a self-hosted agent pool.
 - You must ensure that the pipeline successfully deploys the image at least once.
 
-You complete the following tasks during this exercise:
+In this exercise, you deploy a container app from an image in the Azure Container Registry to the Azure Container Apps platform.
 
-1. Configure Pipeline1 to use the self-hosted agent pool.
+It will take about 10 minutes to complete the following tasks:
 
-1. Configure Pipeline1 with an Azure Container Apps deployment task.
-
-1. Run the Pipeline1 deployment task.
-
-1. Verify the configuration.
+- Configure Pipeline1 to use the self-hosted agent pool.
+- Configure Pipeline1 with an Azure Container Apps deployment task.
+- Run the Pipeline1 deployment task.
 
 #### Task 1: Configure Pipeline1 to use the self-hosted agent pool
 
@@ -1047,35 +1013,20 @@ Complete the following steps to configure your pipelines to use the self-hosted 
 
 ### Exercise 7: Manage revisions in Azure Container Apps
 
-In this exercise, you deploy a new revision of your container app and configure traffic splitting between two labeled revisions.
-
-The following Azure resources must be available in your Resource group named RG1:
-
-- A Container registry instance that contains one image.
-- A Virtual network with subnets.
-- A Service Bus Namespace
-- A Managed Identity
-- A Private endpoint
-- A Container App
-- A Container Apps Environment
-
 You've been asked to configure traffic splitting for your Container Apps to meet the following requirements:
 
 - You need to create a new revision of the container app that uses a suffix of v2.
 - You must ensure that 25 percent of requests to your app are directed to the v2 revision.
-- You must label the revisions "current" and "updated" and ensure that requests to the "---updated" revision are directed to the v2 revision.
+- You must label the revisions "current" and "updated" and ensure that requests to the "---updated" revision are directed to the revision labeled v2.
 
-You complete the following tasks during this exercise:
+In this exercise, you deploy a new revision of your container app and configure traffic splitting between two labeled revisions.
 
-1. Set revision management to multiple.
+It will take about 5-10 minutes to complete the following tasks:
 
-1. Create a new revision with a v2 suffix.
-
-1. Configure labels on the revisions.
-
-1. Configure a traffic percentage on the revisions.
-
-1. Verify the configuration.
+- Set revision management to multiple.
+- Create a new revision with a v2 suffix.
+- Configure labels on the revisions.
+- Configure a traffic percentage on the revisions.
 
 #### Task 1: Set revision management to multiple
 
@@ -1108,7 +1059,7 @@ You complete the following tasks during this exercise:
 
 #### Task 3: Configure labels on the revisions
 
-Ingress must be enable before you can configure revision labels or traffic splitting.
+Ingress must be enabled before you can configure revision labels or traffic splitting.
 
 1. On the left-side menu, under Settings, select **Ingress**.
 
