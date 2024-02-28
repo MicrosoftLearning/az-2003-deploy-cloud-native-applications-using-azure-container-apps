@@ -1036,7 +1036,7 @@ Complete the following steps to set revision management to multiple.
 
 1. In the Azure portal, open your container app resource.
 
-1. On the left side menu, under Application, select **Revisions**.
+1. On the left side menu, under Application, select **Revisions and replicas**.
 
 1. At the top of the Revisions page, select **Choose revision mode**.
 
@@ -1091,7 +1091,7 @@ Complete the following steps to configure labels on the revisions.
 
 1. At the bottom of the Ingress page, select **Save**, and then wait for the update to complete.
 
-1. On the left-side menu, under Revisions, select **Revisions**.
+1. On the left-side menu, under Revisions, select **Revisions and replicas**.
 
 1. For the v2 revision, under Label, enter **updated**
 
