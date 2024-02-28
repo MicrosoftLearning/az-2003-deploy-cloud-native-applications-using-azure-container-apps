@@ -1085,7 +1085,7 @@ Complete the following steps to configure labels on the revisions.
 
     - Insecure connections: ensure that Allowed is **NOT** checked.
 
-    - Target port: enter **80**
+    - Target port: enter **5000**
 
     - IP Security Restrictions Mode: ensure that **Allow all traffic** is selected.
 
