@@ -842,13 +842,11 @@ Complete the following steps to configure HTTP scale rules for your Container Ap
 
 1. Ensure that your Container App is open in the portal.
 
-1. On the left-side menu under Application, select **Revisions**.
+1. On the left-side menu under Application, select **Revisions and replicas**.
 
 1. Notice the Name assigned to your active revision.
 
-1. On the left-side menu under Application, select **Scale and replicas**.
-
-1. To the right of Revision, ensure that your active revision is selected.
+1. On the left-side menu under Application, select **Scale**.
 
 1. At the top of the page, select **Edit and deploy**.
 
@@ -1038,7 +1036,7 @@ Complete the following steps to set revision management to multiple.
 
 1. In the Azure portal, open your container app resource.
 
-1. On the left side menu, under Application, select **Revisions**.
+1. On the left side menu, under Application, select **Revisions and replicas**.
 
 1. At the top of the Revisions page, select **Choose revision mode**.
 
@@ -1087,13 +1085,13 @@ Complete the following steps to configure labels on the revisions.
 
     - Insecure connections: ensure that Allowed is **NOT** checked.
 
-    - Target port: enter **80**
+    - Target port: enter **5000**
 
     - IP Security Restrictions Mode: ensure that **Allow all traffic** is selected.
 
 1. At the bottom of the Ingress page, select **Save**, and then wait for the update to complete.
 
-1. On the left-side menu, under Revisions, select **Revisions**.
+1. On the left-side menu, under Revisions, select **Revisions and replicas**.
 
 1. For the v2 revision, under Label, enter **updated**
 
