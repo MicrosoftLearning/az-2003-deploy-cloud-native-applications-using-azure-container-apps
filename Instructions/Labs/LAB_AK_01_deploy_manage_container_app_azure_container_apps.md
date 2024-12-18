@@ -848,11 +848,7 @@ Complete the following steps to configure HTTP scale rules for your Container Ap
 
 1. On the left-side menu under Application, select **Scale**.
 
-1. At the top of the page, select **Edit and deploy**.
-
-1. At the bottom of the page, select **Next : Scale**.
-
-1. Configure the Min / max replicas as follows:
+1. Notice the current **Scale rule setting**, configure the Min / max replicas as follows:
 
     - Set Min replicas: 0
     - Set Max replicas: 2
@@ -867,11 +863,11 @@ Complete the following steps to configure HTTP scale rules for your Container Ap
 
 1. On the Add scale rule page, select **Add**.
 
-1. On the Create and deploy new revision page, select **Create**.
+1. On the Scale page, select **Save as a new revision**.
 
 1. Ensure that your new scale rule is displayed.
 
-    If the scale rule is not displayed after refreshing, check the Revisions tab to see the current active revision, and then adjust the selected Revision on the Scale and replicas page if needed.
+    If the scale rule is not displayed after refreshing, check the selected revision to see the current active revision, and then adjust the selected Revision on the Scale and replicas page if needed.
 
 ### Exercise 6: Configure continuous integration by using Azure Pipelines
 
