@@ -801,7 +801,7 @@ Complete the following steps to configure the container app to authenticate usin
 
 1. On the Azure portal, open the Container App that you created.
 
-1. Under Settings, select **Identity**.
+1. Under Security, select **Identity**.
 
 1. Select the tab for **User assigned**.
 
