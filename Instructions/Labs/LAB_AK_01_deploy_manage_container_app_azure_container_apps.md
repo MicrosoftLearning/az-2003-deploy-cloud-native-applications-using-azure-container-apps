@@ -1065,7 +1065,7 @@ Ingress must be enabled before you can configure revision labels or traffic spli
 
 Complete the following steps to configure labels on the revisions.
 
-1. On the left-side menu, under Settings, select **Ingress**.
+1. On the left-side menu, under Networking, select **Ingress**.
 
 1. If Ingress isn't enabled, select **Enabled**.
 
