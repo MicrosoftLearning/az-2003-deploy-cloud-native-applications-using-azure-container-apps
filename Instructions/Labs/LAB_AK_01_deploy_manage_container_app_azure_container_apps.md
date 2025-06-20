@@ -342,13 +342,15 @@ Complete the following steps to configure Azure DevOps project.
     - Description: **AZ2003 code project**
     - Visibility: **Public**
 
-1. Select **Create project**.
+1. Select **Create**.
 
-1. On the left-side menu of your AZ2003Project page, select **Repos**.
+1. Select the **AZ2003Project**
 
-1. Under Initialize main branch with a README or gitignore, select **Initialize**.
+1. On the left-side menu of your AZ2003Project page, select **Repositories**.
 
-1. Select **Clone**, and then select **Clone in VS Code**.
+1. Under All Repositories select **AZ2003Project** and then select **Browse**.
+
+1. Select **Clone in VS Code**.
 
 1. On the This site is trying to open Visual Studio Code dialog, select **Open**.
 
@@ -801,7 +803,7 @@ Complete the following steps to configure the container app to authenticate usin
 
 1. On the Azure portal, open the Container App that you created.
 
-1. Under Settings, select **Identity**.
+1. Under Security, select **Identity**.
 
 1. Select the tab for **User assigned**.
 
@@ -1065,7 +1067,7 @@ Ingress must be enabled before you can configure revision labels or traffic spli
 
 Complete the following steps to configure labels on the revisions.
 
-1. On the left-side menu, under Settings, select **Ingress**.
+1. On the left-side menu, under Networking, select **Ingress**.
 
 1. If Ingress isn't enabled, select **Enabled**.
 
