@@ -456,6 +456,13 @@ Complete the following steps to create a Docker image and push the image to your
 
 1. On the left side menu, to open the Docker view, select Docker.
 
+1. Before connecting to the registry, ensure you are properly authenticated with Azure in Visual Studio Code:
+
+    - On the Activity bar, select **Azure** (the Azure icon).
+    - In the Azure view, expand **ACCOUNTS & TENANTS**.
+    - Verify that your Azure account is listed and selected (checked). If not, select your account to authenticate.
+    - If you need to sign in, select **Sign in to Azure** and complete the authentication process.
+
 1. In the DOCKER view, under Registries, select **Connect Registry**, and then select **Azure Azure Container Registry**.
 
 1. In the DOCKER view, expand **Azure**, and then select **Allow**.
