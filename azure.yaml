@@ -1,0 +1,56 @@
+# Azure Developer CLI (azd) configuration
+# TDD Container App Demo V2: Event-Driven Microservices with Azure Container Apps
+name: tdd-azd-az2003-contapp
+metadata:
+  template: tdd-azd-az2003-contapp@0.1.0
+
+# Azure resources to provision
+infra:
+  provider: bicep
+  path: infra
+
+# Lifecycle hooks
+hooks:
+  # Build and push demo-job image before deploy (after provision creates ACR)
+  predeploy:
+    shell: pwsh
+    run: ./scripts/predeploy.ps1
+  # Update Container App Jobs with real demo-job image after deploy
+  postdeploy:
+    shell: pwsh
+    run: ./scripts/postdeploy.ps1
+
+# Services to deploy
+services:
+  # ==========================================================================
+  # Demo 1: Auto-Scaling Demo
+  # ==========================================================================
+  ingestion-service:
+    project: ./src/ingestion-service
+    language: dotnet
+    host: containerapp
+    docker:
+      path: Dockerfile
+  
+  dashboard:
+    project: ./src/dashboard
+    language: js
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  # ==========================================================================
+  # Demo 2: Traffic Splitting Demo
+  # ==========================================================================
+  hello-api:
+    project: ./src/hello-api
+    language: dotnet
+    host: containerapp
+    docker:
+      path: Dockerfile
+
+  # ==========================================================================
+  # Demo 3: Container Jobs
+  # Note: Jobs are deployed via Bicep modules. The job image is built and
+  # pushed by the predeploy hook, then jobs are updated by postdeploy hook.
+  # ==========================================================================

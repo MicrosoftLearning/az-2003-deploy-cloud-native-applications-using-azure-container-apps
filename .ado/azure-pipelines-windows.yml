@@ -1,0 +1,306 @@
+# Azure DevOps Pipeline for Contoso Analytics (Windows Self-Hosted Agent)
+# Builds and deploys microservices to Azure Container Apps
+# Compatible with Windows-based self-hosted agents
+
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+  paths:
+    include:
+      - src/**
+      - infra/**
+
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/**
+      - infra/**
+
+variables:
+  # ==========================================================================
+  # REQUIRED: Set these variables before running the pipeline
+  # You can set them in Azure DevOps: Pipelines > Edit > Variables
+  # ==========================================================================
+  
+  - name: azureSubscription
+    value: 'AzureServiceConnection'
+  
+  - name: resourceGroupName
+    value: 'rg-yourenv'  # UPDATE THIS
+  
+  - name: containerRegistryServer
+    value: 'yourregistry.azurecr.io'  # UPDATE THIS
+  
+  - name: containerRegistryName
+    value: 'yourregistryname'  # UPDATE THIS
+  
+  - name: agentPool
+    value: 'Default'  # UPDATE THIS: Your self-hosted agent pool name
+  
+  - name: location
+    value: 'eastus2'
+  
+  - name: imageTag
+    value: '$(Build.BuildId)'
+
+stages:
+  - stage: Build
+    displayName: 'Build & Test'
+    jobs:
+      - job: BuildDashboard
+        displayName: 'Build Dashboard'
+        pool:
+          name: $(agentPool)
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '20.x'
+
+          - powershell: |
+              Set-Location src/dashboard
+              npm install
+              npm run build
+            displayName: 'Install dependencies & build'
+
+          - powershell: |
+              Set-Location src/dashboard
+              docker build -t dashboard:$(imageTag)-ado -t dashboard:latest-ado .
+            displayName: 'Build Docker image'
+
+          - powershell: |
+              docker save dashboard:$(imageTag)-ado -o $(Build.ArtifactStagingDirectory)/dashboard.tar
+            displayName: 'Save Docker image'
+
+          - publish: $(Build.ArtifactStagingDirectory)/dashboard.tar
+            artifact: dashboard-image
+
+      - job: BuildIngestionService
+        displayName: 'Build Ingestion Service'
+        pool:
+          name: $(agentPool)
+        steps:
+          - task: UseDotNet@2
+            inputs:
+              version: '8.x'
+
+          - powershell: |
+              Set-Location src/ingestion-service
+              dotnet restore
+              dotnet build --configuration Release
+            displayName: 'Restore & build'
+
+          - powershell: |
+              Set-Location src/ingestion-service
+              docker build -t ingestion-service:$(imageTag)-ado -t ingestion-service:latest-ado .
+            displayName: 'Build Docker image'
+
+          - powershell: |
+              docker save ingestion-service:$(imageTag)-ado -o $(Build.ArtifactStagingDirectory)/ingestion-service.tar
+            displayName: 'Save Docker image'
+
+          - publish: $(Build.ArtifactStagingDirectory)/ingestion-service.tar
+            artifact: ingestion-service-image
+
+      - job: BuildHelloApi
+        displayName: 'Build Hello API'
+        pool:
+          name: $(agentPool)
+        steps:
+          - task: UseDotNet@2
+            inputs:
+              version: '8.x'
+
+          - powershell: |
+              Set-Location src/hello-api
+              dotnet restore
+              dotnet build --configuration Release
+            displayName: 'Restore & build'
+
+          - powershell: |
+              Set-Location src/hello-api
+              docker build -t hello-api:$(imageTag)-ado -t hello-api:latest-ado .
+            displayName: 'Build Docker image'
+
+          - powershell: |
+              docker save hello-api:$(imageTag)-ado -o $(Build.ArtifactStagingDirectory)/hello-api.tar
+            displayName: 'Save Docker image'
+
+          - publish: $(Build.ArtifactStagingDirectory)/hello-api.tar
+            artifact: hello-api-image
+
+      - job: BuildDemoJob
+        displayName: 'Build Demo Job'
+        pool:
+          name: $(agentPool)
+        steps:
+          - task: UseDotNet@2
+            inputs:
+              version: '8.x'
+
+          - powershell: |
+              Set-Location src/demo-job
+              dotnet restore
+              dotnet build --configuration Release
+            displayName: 'Restore & build'
+
+          - powershell: |
+              Set-Location src/demo-job
+              docker build -t demo-job:$(imageTag)-ado -t demo-job:latest-ado .
+            displayName: 'Build Docker image'
+
+          - powershell: |
+              docker save demo-job:$(imageTag)-ado -o $(Build.ArtifactStagingDirectory)/demo-job.tar
+            displayName: 'Save Docker image'
+
+          - publish: $(Build.ArtifactStagingDirectory)/demo-job.tar
+            artifact: demo-job-image
+
+      - job: ValidateInfrastructure
+        displayName: 'Validate Bicep Templates'
+        pool:
+          name: $(agentPool)
+        steps:
+          - task: AzureCLI@2
+            displayName: 'Validate Bicep templates'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az bicep build --file infra/main.bicep
+                Write-Host "Bicep templates validated successfully"
+
+          - publish: infra
+            artifact: infrastructure
+
+  - stage: PushImages
+    displayName: 'Push Images to ACR'
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - job: PushToACR
+        displayName: 'Push all images to ACR'
+        pool:
+          name: $(agentPool)
+        steps:
+          - download: current
+            artifact: dashboard-image
+          - download: current
+            artifact: ingestion-service-image
+          - download: current
+            artifact: hello-api-image
+          - download: current
+            artifact: demo-job-image
+
+          - task: AzureCLI@2
+            displayName: 'Push images to ACR'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                $CONTAINER_REGISTRY = "$(containerRegistryServer)"
+                $CONTAINER_REGISTRY_NAME = "$(containerRegistryName)"
+                
+                Write-Host "Container Registry: $CONTAINER_REGISTRY"
+                
+                az acr login --name $CONTAINER_REGISTRY_NAME
+                
+                docker load -i $(Pipeline.Workspace)/dashboard-image/dashboard.tar
+                docker tag dashboard:$(imageTag)-ado "$CONTAINER_REGISTRY/dashboard:$(imageTag)-ado"
+                docker tag dashboard:$(imageTag)-ado "$CONTAINER_REGISTRY/dashboard:latest-ado"
+                docker push "$CONTAINER_REGISTRY/dashboard:$(imageTag)-ado"
+                docker push "$CONTAINER_REGISTRY/dashboard:latest-ado"
+                Write-Host "Dashboard pushed"
+                
+                docker load -i $(Pipeline.Workspace)/ingestion-service-image/ingestion-service.tar
+                docker tag ingestion-service:$(imageTag)-ado "$CONTAINER_REGISTRY/ingestion-service:$(imageTag)-ado"
+                docker tag ingestion-service:$(imageTag)-ado "$CONTAINER_REGISTRY/ingestion-service:latest-ado"
+                docker push "$CONTAINER_REGISTRY/ingestion-service:$(imageTag)-ado"
+                docker push "$CONTAINER_REGISTRY/ingestion-service:latest-ado"
+                Write-Host "Ingestion Service pushed"
+                
+                docker load -i $(Pipeline.Workspace)/hello-api-image/hello-api.tar
+                docker tag hello-api:$(imageTag)-ado "$CONTAINER_REGISTRY/hello-api:$(imageTag)-ado"
+                docker tag hello-api:$(imageTag)-ado "$CONTAINER_REGISTRY/hello-api:latest-ado"
+                docker push "$CONTAINER_REGISTRY/hello-api:$(imageTag)-ado"
+                docker push "$CONTAINER_REGISTRY/hello-api:latest-ado"
+                Write-Host "Hello API pushed"
+                
+                docker load -i $(Pipeline.Workspace)/demo-job-image/demo-job.tar
+                docker tag demo-job:$(imageTag)-ado "$CONTAINER_REGISTRY/demo-job:$(imageTag)-ado"
+                docker tag demo-job:$(imageTag)-ado "$CONTAINER_REGISTRY/demo-job:latest-ado"
+                docker push "$CONTAINER_REGISTRY/demo-job:$(imageTag)-ado"
+                docker push "$CONTAINER_REGISTRY/demo-job:latest-ado"
+                Write-Host "Demo Job pushed"
+
+  - stage: DeployApps
+    displayName: 'Deploy to Container Apps'
+    dependsOn: PushImages
+    jobs:
+      - deployment: DeployContainerApps
+        displayName: 'Deploy Container Apps'
+        pool:
+          name: $(agentPool)
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureCLI@2
+                  displayName: 'Update Ingestion Service'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    scriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      az containerapp update --name ingestion-service --resource-group $(resourceGroupName) --image $(containerRegistryServer)/ingestion-service:$(imageTag)-ado
+
+                - task: AzureCLI@2
+                  displayName: 'Update Dashboard'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    scriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      az containerapp update --name dashboard --resource-group $(resourceGroupName) --image $(containerRegistryServer)/dashboard:$(imageTag)-ado
+
+                - task: AzureCLI@2
+                  displayName: 'Update Hello API'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    scriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      az containerapp update --name hello-api --resource-group $(resourceGroupName) --image $(containerRegistryServer)/hello-api:$(imageTag)-ado
+
+                - task: AzureCLI@2
+                  displayName: 'Update Container Jobs'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    scriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      az containerapp job update --name data-processor-scheduled --resource-group $(resourceGroupName) --image $(containerRegistryServer)/demo-job:$(imageTag)-ado
+                      az containerapp job update --name data-processor-manual --resource-group $(resourceGroupName) --image $(containerRegistryServer)/demo-job:$(imageTag)-ado
+                      az containerapp job update --name data-processor-parallel --resource-group $(resourceGroupName) --image $(containerRegistryServer)/demo-job:$(imageTag)-ado
+
+                - task: AzureCLI@2
+                  displayName: 'Display deployment URLs'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    scriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      Write-Host "Deployment Complete!"
+                      $dashboardFqdn = az containerapp show --name dashboard --resource-group $(resourceGroupName) --query properties.configuration.ingress.fqdn -o tsv
+                      Write-Host "Dashboard: https://$dashboardFqdn"
+                      $ingestionFqdn = az containerapp show --name ingestion-service --resource-group $(resourceGroupName) --query properties.configuration.ingress.fqdn -o tsv
+                      Write-Host "Ingestion Service: https://$ingestionFqdn"
+                      $helloApiFqdn = az containerapp show --name hello-api --resource-group $(resourceGroupName) --query properties.configuration.ingress.fqdn -o tsv
+                      Write-Host "Hello API: https://$helloApiFqdn"

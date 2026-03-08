@@ -1,0 +1,55 @@
+# Contoso Analytics Demo
+.env
+.env.*
+!.env.example
+
+# Azure Developer CLI
+.azure/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+
+# Playwright
+.playwright-mcp
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.tar
+
+# GitHub Copilot Agents
+.github/agents
+.github/prompts

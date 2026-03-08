@@ -1,0 +1,9 @@
+{
+  "appManagedEnvironments": "cae-",
+  "containerRegistryRegistries": "cr",
+  "serviceBusNamespaces": "sb-",
+  "keyVaultVaults": "kv-",
+  "managedIdentityUserAssignedIdentities": "id-",
+  "operationalInsightsWorkspaces": "log-",
+  "resourcesResourceGroups": "rg-"
+}
