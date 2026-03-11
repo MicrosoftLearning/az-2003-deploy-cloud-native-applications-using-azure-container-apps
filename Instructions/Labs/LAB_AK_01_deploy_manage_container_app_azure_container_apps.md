@@ -1,8 +1,21 @@
 ---
 lab:
-    title: 'Lab: Deploy and manage a container app using Azure Container Apps'
-    type: 'Answer Key'
-    module: 'Module 6: Deploy and manage a container app using Azure Container Apps'
+  title: 'Lab: Deploy and manage a container app using Azure Container Apps'
+  type: Answer Key
+  module: 'Module 6: Deploy and manage a container app using Azure Container Apps'
+  description: In this lab, you'll deploy and manage an app using Azure Container
+    Apps. To implement the solution, you begin by configuring a development environment
+    that uses a combination of local tools and Azure resources. Once the environment
+    is prepared, you use Azure Container Registry, Azure Container Apps, and Azure
+    Pipelines to deploy and manage your app.
+  duration: 15 minutes
+  level: 500
+  islab: true
+  primarytopics:
+  - Azure
+  - Azure Container Apps
+  - Azure Container Registry
+  - Azure Pipelines
 ---
 
 # Lab: Deploy and manage a container app using Azure Container Apps
