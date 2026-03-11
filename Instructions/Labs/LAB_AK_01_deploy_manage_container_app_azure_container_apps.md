@@ -1,8 +1,15 @@
 ---
 lab:
-    title: 'Lab: Deploy and manage a container app using Azure Container Apps'
-    type: 'Answer Key'
-    module: 'Module 6: Deploy and manage a container app using Azure Container Apps'
+  title: 'Lab: Deploy and manage a container app using Azure Container Apps'
+  type: Answer Key
+  module: 'Module 6: Deploy and manage a container app using Azure Container Apps'
+  description: In this exercise, you'll configure Azure resources that support your Azure Container Apps solution.
+  duration: 15 minutes
+  level: 500
+  islab: true
+  primarytopics:
+    - Azure
+    - Azure Container Apps
 ---
 
 # Lab: Deploy and manage a container app using Azure Container Apps
