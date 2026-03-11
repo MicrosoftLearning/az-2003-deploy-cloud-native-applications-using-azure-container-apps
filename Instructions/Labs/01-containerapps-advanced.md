@@ -1,9 +1,14 @@
 ---
 lab:
-    title: 'Deploy and Operate Azure Container Apps'
-    description: 'Deploy Azure Container Apps infrastructure using Bicep, build container images, implement auto-scaling, traffic splitting, batch processing jobs, and CI/CD with Azure DevOps'
-    level: 300
-    Duration: 150 minutes
+  title: Deploy and Operate Azure Container Apps
+  description: Deploy Azure Container Apps infrastructure using Bicep, build container images, implement auto-scaling, traffic splitting, batch processing jobs, and CI/CD with Azure DevOps
+  level: 300
+  duration: 150 minutes
+  islab: true
+  primarytopics:
+    - Azure
+    - Azure Container Apps
+    - Azure DevOps
 ---
 
 # Deploy and Operate Azure Container Apps
