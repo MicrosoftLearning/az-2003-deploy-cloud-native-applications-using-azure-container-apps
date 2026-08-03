@@ -51,6 +51,10 @@ variables:
   - name: imageTag
     value: '$(Build.BuildId)'
 
+  # Keep blue-green deployment opt-in until explicitly enabled for a run.
+  - name: deployBlueGreen
+    value: 'false'
+
 stages:
   # ============================================================================
   # Stage 1: Build - Build and Test all microservices
@@ -390,3 +394,68 @@ stages:
                       echo ""
                       echo "Build ID: $(imageTag)"
                       echo "============================================"
+
+  # ============================================================================
+  # Stage 4: Blue-Green Deployment (Optional - Manual Trigger)
+  # ============================================================================
+  - stage: BlueGreenDeploy
+    displayName: 'Blue-Green Deployment'
+    dependsOn: DeployApps
+    condition: and(succeeded(), eq(variables['deployBlueGreen'], 'true'))
+    jobs:
+      - deployment: BlueGreenHelloApi
+        displayName: 'Blue-Green Hello API'
+        pool:
+          vmImage: 'ubuntu-latest'
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureCLI@2
+                  displayName: 'Enable Multiple Revision Mode'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    scriptType: 'bash'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      az containerapp revision set-mode \
+                        --name hello-api \
+                        --resource-group $(resourceGroupName) \
+                        --mode Multiple
+
+                - task: AzureCLI@2
+                  displayName: 'Deploy New Revision'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    scriptType: 'bash'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      az containerapp update \
+                        --name hello-api \
+                        --resource-group $(resourceGroupName) \
+                        --image $(containerRegistryServer)/hello-api:$(imageTag)-ado \
+                        --revision-suffix "v2-$(Build.BuildId)" \
+                        --set-env-vars "APP_VERSION=v2"
+
+                - task: AzureCLI@2
+                  displayName: 'Configure 50/50 Traffic Split'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    scriptType: 'bash'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      V1_REVISION=$(az containerapp revision list \
+                        --name hello-api \
+                        --resource-group $(resourceGroupName) \
+                        --query "[?properties.active && !contains(name, 'v2-')].name | [0]" -o tsv)
+
+                      V2_REVISION=$(az containerapp revision list \
+                        --name hello-api \
+                        --resource-group $(resourceGroupName) \
+                        --query "[?contains(name, 'v2-$(Build.BuildId)')].name | [0]" -o tsv)
+
+                      az containerapp ingress traffic set \
+                        --name hello-api \
+                        --resource-group $(resourceGroupName) \
+                        --revision-weight "$V1_REVISION=50" "$V2_REVISION=50"
