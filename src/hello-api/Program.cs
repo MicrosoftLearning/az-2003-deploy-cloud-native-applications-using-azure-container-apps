@@ -28,7 +28,7 @@ app.MapGet("/", () => Results.Content($@"
 <html>
 <head>
   <meta charset=""UTF-8"">
-  <title>Hello API - {version}</title>
+  <title>Contoso Analytics API v2</title>
   <style>
     body {{
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
